@@ -3,14 +3,14 @@
 
 namespace Psycho {
 	public class ConfigurationData {
-		public readonly static Version ConfigVersion = new Version( 1, 0, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 0, 1 );
 
 
 		public string VersionSinceUpdate = "";
 
 		public bool Enabled = true;
 
-		public float PsychoSpawnChance = 0.02f;
+		public float PsychoSpawnChance = 0.04f;
 		public int PsychoHealRate = (int)(60f * 1.5f);
 		public int PsychoHealAmount = 50;
 		public bool PsychoCanDropLoot = true;
@@ -28,10 +28,22 @@ namespace Psycho {
 			if( vers_since >= ConfigurationData.ConfigVersion ) {
 				return false;
 			}
-			
+
+			if( vers_since < new Version( 1, 0, 1 ) ) {
+				if( ConfigurationData._1_0_0_PsychoSpawnChance == this.PsychoSpawnChance ) {
+					this.PsychoSpawnChance = new_config.PsychoSpawnChance;
+				}
+			}
+
 			this.VersionSinceUpdate = ConfigurationData.ConfigVersion.ToString();
 
 			return true;
 		}
+
+		////////////////
+
+		public string _OLD_SETTINGS_BELOW = "";
+
+		public readonly static float _1_0_0_PsychoSpawnChance = 0.02f;
 	}
 }
