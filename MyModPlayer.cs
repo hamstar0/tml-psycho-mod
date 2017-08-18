@@ -28,7 +28,7 @@ namespace Psycho {
 				}
 
 				if( Main.netMode == 1 ) {   // Client
-					ClientNetProtocol.SendModSettingsRequestFromClient( mymod );
+					ClientPacketHandlers.SendModSettingsRequestFromClient( mymod );
 				}
 
 				this.HasEnteredWorld = true;

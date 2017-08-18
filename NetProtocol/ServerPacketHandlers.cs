@@ -5,19 +5,14 @@ using Terraria.ModLoader;
 
 
 namespace Psycho.NetProtocol {
-	public enum ServerNetProtocolTypes : byte {
-		RequestModSettings=0
-	}
-
-
-	public static class ServerNetProtocol {
-		public static void RoutePacket( Psycho mymod, BinaryReader reader, int player_who ) {
-			ServerNetProtocolTypes protocol = (ServerNetProtocolTypes)reader.ReadByte();
+	public static class ServerPacketHandlers {
+		public static void HandlePacket( Psycho mymod, BinaryReader reader, int player_who ) {
+			NetProtocolTypes protocol = (NetProtocolTypes)reader.ReadByte();
 
 			switch( protocol ) {
-			case ServerNetProtocolTypes.RequestModSettings:
+			case NetProtocolTypes.RequestModSettings:
 				//if( mymod.IsDebugInfoMode() ) { DebugHelpers.Log( "RouteReceivedServerPackets.RequestModSettings" ); }
-				ServerNetProtocol.ReceiveModSettingsRequestOnServer( mymod, reader, player_who );
+				ServerPacketHandlers.ReceiveModSettingsRequestOnServer( mymod, reader, player_who );
 				break;
 			default:
 				/*if( mymod.IsDebugInfoMode() ) {*/ DebugHelpers.Log( "RouteReceivedServerPackets ...? " + protocol ); //}
@@ -37,7 +32,7 @@ namespace Psycho.NetProtocol {
 
 			ModPacket packet = mymod.GetPacket();
 
-			packet.Write( (byte)ClientNetProtocolTypes.ModSettings );
+			packet.Write( (byte)NetProtocolTypes.ModSettings );
 			packet.Write( (string)mymod.Config.SerializeMe() );
 
 			packet.Send( (int)player.whoAmI );
@@ -53,7 +48,7 @@ namespace Psycho.NetProtocol {
 			// Server only
 			if( Main.netMode != 2 ) { return; }
 
-			ServerNetProtocol.SendModSettingsFromServer( mymod, Main.player[player_who] );
+			ServerPacketHandlers.SendModSettingsFromServer( mymod, Main.player[player_who] );
 		}
 	}
 }

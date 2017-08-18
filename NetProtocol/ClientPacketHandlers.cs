@@ -5,19 +5,14 @@ using Terraria.ModLoader;
 
 
 namespace Psycho.NetProtocol {
-	public enum ClientNetProtocolTypes : byte {
-		ModSettings=128,
-	}
-
-
-	public static class ClientNetProtocol {
-		public static void RoutePacket( Psycho mymod, BinaryReader reader ) {
-			ClientNetProtocolTypes protocol = (ClientNetProtocolTypes)reader.ReadByte();
+	public static class ClientPacketHandlers {
+		public static void HandlePacket( Psycho mymod, BinaryReader reader ) {
+			NetProtocolTypes protocol = (NetProtocolTypes)reader.ReadByte();
 
 			switch( protocol ) {
-			case ClientNetProtocolTypes.ModSettings:
+			case NetProtocolTypes.ModSettings:
 				//if( mymod.IsDebugInfoMode() ) { DebugHelpers.Log( "RouteReceivedClientPackets.ModSettings" ); }
-				ClientNetProtocol.ReceiveModSettingsOnClient( mymod, reader );
+				ClientPacketHandlers.ReceiveModSettingsOnClient( mymod, reader );
 				break;
 			default:
 				/*if( mymod.IsDebugInfoMode() ) {*/ DebugHelpers.Log( "RouteReceivedClientPackets ...? "+protocol ); //}
@@ -37,7 +32,7 @@ namespace Psycho.NetProtocol {
 
 			ModPacket packet = mymod.GetPacket();
 
-			packet.Write( (byte)ServerNetProtocolTypes.RequestModSettings );
+			packet.Write( (byte)NetProtocolTypes.RequestModSettings );
 
 			packet.Send();
 		}

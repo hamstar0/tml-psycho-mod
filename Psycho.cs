@@ -54,9 +54,9 @@ namespace Psycho {
 
 		public override void HandlePacket( BinaryReader reader, int player_who ) {
 			if( Main.netMode == 1 ) {   // Client
-				ClientNetProtocol.RoutePacket( this, reader );
+				ClientPacketHandlers.HandlePacket( this, reader );
 			} else if( Main.netMode == 2 ) {    // Server
-				ServerNetProtocol.RoutePacket( this, reader, player_who );
+				ServerPacketHandlers.HandlePacket( this, reader, player_who );
 			}
 		}
 	}
