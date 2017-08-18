@@ -55,6 +55,8 @@
     <Compile Include="ConfigDefaults.cs" />
     <Compile Include="MyGlobalNpc.cs" />
     <Compile Include="MyModPlayer.cs" />
+    <Compile Include="NetProtocol\ClientNetProtocol.cs" />
+    <Compile Include="NetProtocol\ServerNetProtocol.cs" />
     <Compile Include="Psycho.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
