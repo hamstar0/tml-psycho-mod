@@ -4,4 +4,4 @@ displayName = Psycho!
 modReferences = HamstarHelpers
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
 includePDB = true
-homepage = https://forums.terraria.org/index.php?threads/dynamic-invasions.61060/
+homepage = https://forums.terraria.org/index.php?threads/psycho.61219/
