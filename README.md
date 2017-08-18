@@ -1,0 +1,1 @@
+Randomly spawns a Psycho at unexpected moments. Hilarity may ensue.
