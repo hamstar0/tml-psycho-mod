@@ -26,8 +26,10 @@ namespace Psycho {
 
 		public override void Load() {
 			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
-			if( hamhelpmod.Version < new Version( 1, 0, 17 ) ) {
-				throw new Exception( "Hamstar's Helpers must be version " + hamhelpmod.Version.ToString() + " or greater." );
+			var min_vers = new Version( 1, 0, 17 );
+
+			if( hamhelpmod.Version < min_vers ) {
+				throw new Exception( "Hamstar's Helpers must be version " + min_vers.ToString() + " or greater." );
 			}
 
 			this.LoadConfig();
