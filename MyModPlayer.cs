@@ -19,7 +19,7 @@ namespace Psycho {
 
 		public override void OnEnterWorld( Player player ) {
 			if( this.player.whoAmI == Main.myPlayer ) {
-				var mymod = (Psycho)this.mod;
+				var mymod = (PsychoMod)this.mod;
 
 				if( Main.netMode != 2 ) {   // Not server
 					if( !mymod.Config.LoadFile() ) {
@@ -32,15 +32,6 @@ namespace Psycho {
 				}
 
 				this.HasEnteredWorld = true;
-			}
-		}
-
-
-		////////////////
-
-		public override void PreUpdate() {
-			if( this.player.whoAmI == Main.myPlayer || Main.netMode == 2 ) {
-				MyGlobalNpc.UpdateAll( this.player );
 			}
 		}
 	}

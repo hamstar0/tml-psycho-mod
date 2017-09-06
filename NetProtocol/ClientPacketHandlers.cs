@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace Psycho.NetProtocol {
 	public static class ClientPacketHandlers {
-		public static void HandlePacket( Psycho mymod, BinaryReader reader ) {
+		public static void HandlePacket( PsychoMod mymod, BinaryReader reader ) {
 			NetProtocolTypes protocol = (NetProtocolTypes)reader.ReadByte();
 
 			switch( protocol ) {
@@ -26,7 +26,7 @@ namespace Psycho.NetProtocol {
 		// Client Senders
 		////////////////
 
-		public static void SendModSettingsRequestFromClient( Psycho mymod ) {
+		public static void SendModSettingsRequestFromClient( PsychoMod mymod ) {
 			// Clients only
 			if( Main.netMode != 1 ) { return; }
 
@@ -43,7 +43,7 @@ namespace Psycho.NetProtocol {
 		// Client Receivers
 		////////////////
 
-		private static void ReceiveModSettingsOnClient( Psycho mymod, BinaryReader reader ) {
+		private static void ReceiveModSettingsOnClient( PsychoMod mymod, BinaryReader reader ) {
 			// Clients only
 			if( Main.netMode != 1 ) { return; }
 			
