@@ -1,10 +1,10 @@
 ﻿using HamstarHelpers.Utilities.Config;
 using System;
-
+using Terraria.ID;
 
 namespace Psycho {
 	public class PsychoConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 1, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 2, 0 );
 
 
 		public string VersionSinceUpdate = "";
@@ -17,7 +17,13 @@ namespace Psycho {
 		public int PsychoHealRate = (int)(60f * 1.5f);
 		public int PsychoHealAmount = 50;
 		public bool PsychoCanDropLoot = true;
-		public bool PsychoWardedByHeartLantern = true;
+
+		public int[] PsychoWardingNeedsBuffs = new int[] {
+			//BuffID.HeartLamp,
+			//BuffID.Sunflower,
+			BuffID.StarInBottle,
+			BuffID.Campfire
+		};
 
 
 
@@ -57,6 +63,8 @@ namespace Psycho {
 		////////////////
 
 		public string _OLD_SETTINGS_BELOW = "";
+
+		public bool PsychoWardedByHeartLantern = true;
 
 		public readonly static float _1_0_0_PsychoSpawnChance = 0.02f;
 		public readonly static float _1_0_1_PsychoSpawnChance = 0.04f;

@@ -1,5 +1,4 @@
 ﻿using HamstarHelpers.DebugHelpers;
-using HamstarHelpers.TmlHelpers;
 using HamstarHelpers.Utilities.Config;
 using Psycho.NetProtocol;
 using System;
@@ -27,7 +26,7 @@ namespace Psycho {
 
 		public override void Load() {
 			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
-			var min_vers = new Version( 1, 1, 0 );
+			var min_vers = new Version( 1, 1, 1 );
 
 			if( hamhelpmod.Version < min_vers ) {
 				throw new Exception( "Hamstar's Helpers must be version " + min_vers.ToString() + " or greater." );
@@ -53,7 +52,7 @@ namespace Psycho {
 		}
 		
 		public override void PostSetupContent() {
-			AltNPCInfo.RegisterInfoType( this, new PsychoInfo() );
+			PsychoInfo.RegisterInfoType<PsychoInfo>();
 		}
 
 

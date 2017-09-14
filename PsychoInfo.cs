@@ -20,10 +20,14 @@ namespace Psycho {
 			if( WorldHelpers.IsAboveWorldSurface( pos ) || WorldHelpers.IsWithinUnderworld( pos ) ) {
 				return false;
 			}
-			if( config.PsychoWardedByHeartLantern && spawn_info.player.FindBuffIndex(BuffID.HeartLamp) != -1 ) {
-				return false;
+
+			foreach( int buff_id in config.PsychoWardingNeedsBuffs ) {
+				if( spawn_info.player.FindBuffIndex(buff_id) == -1 ) {
+					return true;
+				}
 			}
-			return true;
+			
+			return false;
 		}
 
 

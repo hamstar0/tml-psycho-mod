@@ -58,9 +58,9 @@
     <Compile Include="NetProtocol\ClientPacketHandlers.cs" />
     <Compile Include="NetProtocol\NetProtocolTypes.cs" />
     <Compile Include="NetProtocol\ServerPacketHandlers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsychoInfo.cs" />
     <Compile Include="PsychoMod.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />

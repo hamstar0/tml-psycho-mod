@@ -16,7 +16,7 @@ namespace Psycho {
 
 
 		public override bool PreNPCLoot( NPC npc ) {
-			var npc_info = (PsychoInfo)PsychoInfo.GetNpcInfo( this.mod, npc.whoAmI );
+			var npc_info = PsychoInfo.GetNpcInfo<PsychoInfo>( npc.whoAmI );
 			if( npc_info != null ) {
 				var config = ((PsychoMod)this.mod).Config.Data;
 				return config.PsychoCanDropLoot;
@@ -27,7 +27,7 @@ namespace Psycho {
 
 
 		public override bool PreAI( NPC npc ) {
-			var npc_info = (PsychoInfo)PsychoInfo.GetNpcInfo( this.mod, npc.whoAmI );
+			var npc_info = PsychoInfo.GetNpcInfo<PsychoInfo>( npc.whoAmI );
 
 			if( npc_info != null ) {
 				npc_info.Update( ((PsychoMod)this.mod).Config.Data );
