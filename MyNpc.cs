@@ -5,7 +5,7 @@ using Terraria;
 
 
 namespace Psycho {
-	class MyGlobalNpc : GlobalNPC {
+	class MyNpc : GlobalNPC {
 		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawn_info ) {
 			var config = ((PsychoMod)this.mod).Config.Data;
 

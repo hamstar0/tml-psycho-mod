@@ -9,8 +9,30 @@ using Terraria.ModLoader;
 
 namespace Psycho {
     public class PsychoMod : Mod {
+		public static string GithubUserName { get { return "hamstar0"; } }
+		public static string GithubProjectName { get { return "tml-psycho-mod"; } }
+
+		public static string ConfigRelativeFilePath {
+			get { return ConfigurationDataBase.RelativePath + Path.DirectorySeparatorChar + PsychoConfigData.ConfigFileName; }
+		}
+		public static void ReloadConfigFromFile() {
+			if( Main.netMode != 0 ) {
+				throw new Exception( "Cannot reload configs outside of single player." );
+			}
+			if( PsychoMod.Instance != null ) {
+				PsychoMod.Instance.Config.LoadFile();
+			}
+		}
+
+		public static PsychoMod Instance { get; private set; }
+
+
+		////////////////
+
 		public JsonConfig<PsychoConfigData> Config { get; private set; }
 
+
+		////////////////
 
 		public PsychoMod() {
 			this.Properties = new ModProperties() {
@@ -18,11 +40,12 @@ namespace Psycho {
 				AutoloadGores = true,
 				AutoloadSounds = true
 			};
-
-			string filename = "Psycho Config.json";
-			this.Config = new JsonConfig<PsychoConfigData>( filename, "Mod Configs", new PsychoConfigData() );
+			
+			this.Config = new JsonConfig<PsychoConfigData>( PsychoConfigData.ConfigFileName,
+				ConfigurationDataBase.RelativePath, new PsychoConfigData() );
 		}
 
+		////////////////
 
 		public override void Load() {
 			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
@@ -50,7 +73,9 @@ namespace Psycho {
 				this.Config.SaveFile();
 			}
 		}
-		
+
+		////////////////
+
 		public override void PostSetupContent() {
 			PsychoInfo.RegisterInfoType<PsychoInfo>();
 		}
@@ -64,6 +89,13 @@ namespace Psycho {
 			} else if( Main.netMode == 2 ) {    // Server
 				ServerPacketHandlers.HandlePacket( this, reader, player_who );
 			}
+		}
+
+
+		////////////////
+
+		public bool IsDebugInfo() {
+			return (this.Config.Data.DEBUGMODE & 1) > 0;
 		}
 	}
 }

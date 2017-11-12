@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 
 namespace Psycho.NetProtocol {
-	public static class ServerPacketHandlers {
+	static class ServerPacketHandlers {
 		public static void HandlePacket( PsychoMod mymod, BinaryReader reader, int player_who ) {
 			NetProtocolTypes protocol = (NetProtocolTypes)reader.ReadByte();
 

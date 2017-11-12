@@ -48,7 +48,7 @@ namespace Psycho {
 			this.HealTimer = 0;
 
 			var mymod = (PsychoMod)ModLoader.GetMod( "Psycho" );
-			if( mymod.Config.Data.IsDebugInfo() ) {
+			if( mymod.IsDebugInfo() ) {
 				Main.NewText( "Psycho "+npc.whoAmI+" spawned at " + npc.position );
 			}
 		}

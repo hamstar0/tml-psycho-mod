@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 
 namespace Psycho {
-	class MyModPlayer : ModPlayer {
+	class MyPlayer : ModPlayer {
 		public bool HasEnteredWorld = false;
 
 
@@ -13,7 +13,7 @@ namespace Psycho {
 		}
 
 		public override void clientClone( ModPlayer client_clone ) {
-			var clone = (MyModPlayer)client_clone;
+			var clone = (MyPlayer)client_clone;
 			clone.HasEnteredWorld = this.HasEnteredWorld;
 		}
 

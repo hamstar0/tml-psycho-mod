@@ -5,7 +5,10 @@ using Terraria.ID;
 namespace Psycho {
 	public class PsychoConfigData : ConfigurationDataBase {
 		public readonly static Version ConfigVersion = new Version( 1, 2, 0 );
+		public readonly static string ConfigFileName = "Psycho Config.json";
 
+
+		////////////////
 
 		public string VersionSinceUpdate = "";
 
@@ -24,8 +27,7 @@ namespace Psycho {
 			BuffID.StarInBottle,
 			BuffID.Campfire
 		};
-
-
+		
 
 		////////////////
 
@@ -69,12 +71,5 @@ namespace Psycho {
 		public readonly static float _1_0_0_PsychoSpawnChance = 0.02f;
 		public readonly static float _1_0_1_PsychoSpawnChance = 0.04f;
 		public readonly static float _1_0_2_PsychoSpawnChance = 0.015f;
-
-
-		////////////////
-
-		public bool IsDebugInfo() {
-			return (this.DEBUGMODE & 1) > 0;
-		}
 	}
 }
