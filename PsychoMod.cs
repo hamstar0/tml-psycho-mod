@@ -8,7 +8,9 @@ using Terraria.ModLoader;
 
 
 namespace Psycho {
-    public class PsychoMod : Mod {
+    class PsychoMod : Mod {
+		public static PsychoMod Instance { get; private set; }
+
 		public static string GithubUserName { get { return "hamstar0"; } }
 		public static string GithubProjectName { get { return "tml-psycho-mod"; } }
 
@@ -23,8 +25,6 @@ namespace Psycho {
 				PsychoMod.Instance.Config.LoadFile();
 			}
 		}
-
-		public static PsychoMod Instance { get; private set; }
 
 
 		////////////////
