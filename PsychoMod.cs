@@ -1,6 +1,5 @@
 ﻿using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.Utilities.Config;
-using Psycho.NetProtocols;
 using System;
 using System.IO;
 using Terraria;

@@ -34,7 +34,6 @@ namespace Psycho {
 		////////////////
 
 		public int HealTimer { get; private set; }
-		private bool IsInitialized = false;
 
 
 		////////////////
@@ -92,6 +91,8 @@ namespace Psycho {
 			if( healed > 0 ) {
 				int ct = CombatText.NewText( npc.getRect(), Color.Green, "+" + healed );
 				Main.combatText[ct].lifeTime = 60;
+
+				npc.netUpdate = true;
 			}
 		}
 	}

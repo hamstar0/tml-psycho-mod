@@ -6,6 +6,12 @@ using Terraria;
 
 namespace Psycho {
 	partial class PsychoNpc : GlobalNPC {
+		private bool IsInitialized = false;
+
+
+		////////////////
+
+		public override bool InstancePerEntity { get { return true; } }
 		public override bool CloneNewInstances { get { return true; } }
 
 		public override GlobalNPC Clone() {
@@ -37,6 +43,8 @@ namespace Psycho {
 
 
 		public override bool PreAI( NPC npc ) {
+			if( npc.type != NPCID.Psycho ) { return base.PreAI(npc); }
+
 			var mymod = (PsychoMod)this.mod;
 
 			if( !this.IsInitialized ) {
@@ -46,11 +54,11 @@ namespace Psycho {
 				}
 			}
 
-			if( this.IsInitialized ) {
+			if( this.IsInitialized && Main.netMode == 2 ) {
 				this.UpdateHeal( npc );
 			}
 
-			return true;
+			return base.PreAI( npc );
 		}
 	}
 }
