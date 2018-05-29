@@ -2,6 +2,7 @@
 using System;
 using Terraria.ID;
 
+
 namespace Psycho {
 	public class PsychoConfigData : ConfigurationDataBase {
 		public readonly static Version ConfigVersion = new Version( 1, 3, 0 );

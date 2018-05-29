@@ -22,7 +22,7 @@ namespace Psycho {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
 			if( PsychoMod.Instance != null ) {
-				PsychoMod.Instance.Config.ConfigJson();
+				PsychoMod.Instance.ConfigJson.LoadFile();
 			}
 		}
 
@@ -36,6 +36,8 @@ namespace Psycho {
 		////////////////
 
 		public PsychoMod() {
+			PsychoMod.Instance = this;
+
 			this.Properties = new ModProperties() {
 				Autoload = true,
 				AutoloadGores = true,
@@ -69,15 +71,8 @@ namespace Psycho {
 			}
 		}
 
-
-		////////////////
-
-		public override void HandlePacket( BinaryReader reader, int player_who ) {
-			if( Main.netMode == 1 ) {   // Client
-				ClientPacketHandlers.HandlePacket( this, reader );
-			} else if( Main.netMode == 2 ) {    // Server
-				ServerPacketHandlers.HandlePacket( this, reader, player_who );
-			}
+		public override void Unload() {
+			PsychoMod.Instance = null;
 		}
 	}
 }

@@ -1,37 +1,37 @@
-﻿using Psycho.NetProtocols;
+﻿using HamstarHelpers.Utilities.Network;
+using Psycho.NetProtocols;
 using Terraria;
 using Terraria.ModLoader;
 
 
 namespace Psycho {
 	class PsychoPlayer : ModPlayer {
-		public bool HasEnteredWorld = false;
+		public bool HasEnteredWorld { get; internal set; }
 
+
+		////////////////
+
+		public override bool CloneNewInstances { get { return false; } }
 
 		public override void Initialize() {
 			this.HasEnteredWorld = false;
 		}
 
-		public override void clientClone( ModPlayer client_clone ) {
-			var clone = (PsychoPlayer)client_clone;
-			clone.HasEnteredWorld = this.HasEnteredWorld;
-		}
+		////////////////
 
 		public override void OnEnterWorld( Player player ) {
-			if( this.player.whoAmI == Main.myPlayer ) {
-				var mymod = (PsychoMod)this.mod;
+			if( this.player.whoAmI == Main.myPlayer ) { return; }
 
-				if( Main.netMode != 2 ) {   // Not server
-					if( !mymod.Config.LoadFile() ) {
-						mymod.Config.SaveFile();
-					}
-				}
+			var mymod = (PsychoMod)this.mod;
 
-				if( Main.netMode == 1 ) {   // Client
-					ClientPacketHandlers.SendModSettingsRequestFromClient( mymod );
+			if( Main.netMode == 0 ) {
+				if( !mymod.ConfigJson.LoadFile() ) {
+					mymod.ConfigJson.SaveFile();
 				}
 
 				this.HasEnteredWorld = true;
+			} else if( Main.netMode == 1 ) {
+				PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
 			}
 		}
 	}
