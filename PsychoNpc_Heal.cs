@@ -1,5 +1,4 @@
-﻿using HamstarHelpers.TmlHelpers;
-using HamstarHelpers.WorldHelpers;
+﻿using HamstarHelpers.WorldHelpers;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -8,7 +7,7 @@ using Terraria.ModLoader;
 
 
 namespace Psycho {
-	class PsychoInfo : AltNPCInfo {
+	partial class PsychoNpc : GlobalNPC {
 		public static bool IsValidNpc( NPC npc ) {
 			if( npc.type != NPCID.Psycho ) { return false; }
 			var pos = npc.position;
@@ -35,46 +34,45 @@ namespace Psycho {
 		////////////////
 
 		public int HealTimer { get; private set; }
+		private bool IsInitialized = false;
 
 
 		////////////////
-
-		public override bool CanInitialize( NPC npc ) {
-			return PsychoInfo.IsValidNpc( npc );
-		}
-
-		public override void Initialize( NPC npc ) {
+		
+		public void Initialize( NPC npc ) {
 			npc.lavaImmune = true;
 			this.HealTimer = 0;
 
 			var mymod = (PsychoMod)ModLoader.GetMod( "Psycho" );
-			if( mymod.IsDebugInfo() ) {
+			if( mymod.Config.DebugModeInfo ) {
 				Main.NewText( "Psycho "+npc.whoAmI+" spawned at " + npc.position );
 			}
 		}
 
 		////////////////
 
-		public void Update( PsychoConfigData config ) {
+		public void UpdateHeal( NPC npc ) {
 			int distance = 16 * 200;    // Proximity to underground player
 
 			for( int i = 0; i < Main.player.Length; i++ ) {
 				Player player = Main.player[i];
 				if( player == null || !player.active ) { continue; }
 
-				if( Math.Abs( Vector2.Distance( this.Npc.position, player.position ) ) <= distance ) {
-					this.UpdateMe( config ); // At most once per frame, when relevant
+				if( Math.Abs( Vector2.Distance( npc.position, player.position ) ) <= distance ) {
+					this.UpdateNearPlayer( npc ); // At most once per frame, when relevant
 					break;
 				}
 			}
 		}
 
 
-		private void UpdateMe( PsychoConfigData config ) {
-			if( this.Npc.life < this.Npc.lifeMax ) {
-				if( this.HealTimer >= config.PsychoHealRate ) {
+		private void UpdateNearPlayer( NPC npc ) {
+			var mymod = (PsychoMod)this.mod;
+
+			if( npc.life < npc.lifeMax ) {
+				if( this.HealTimer >= mymod.Config.PsychoHealRate ) {
 					this.HealTimer = 0;
-					this.HealMe( config );
+					this.HealMe( npc );
 				} else {
 					this.HealTimer++;
 				}
@@ -84,9 +82,9 @@ namespace Psycho {
 		}
 
 
-		public void HealMe( PsychoConfigData config ) {
-			NPC npc = this.Npc;
-			int new_life = Math.Min( npc.life + config.PsychoHealAmount, npc.lifeMax );
+		public void HealMe( NPC npc ) {
+			var mymod = (PsychoMod)this.mod;
+			int new_life = Math.Min( npc.life + mymod.Config.PsychoHealAmount, npc.lifeMax );
 			int healed = new_life - npc.life;
 
 			npc.life = new_life;

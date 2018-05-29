@@ -1,10 +1,10 @@
-﻿using Psycho.NetProtocol;
+﻿using Psycho.NetProtocols;
 using Terraria;
 using Terraria.ModLoader;
 
 
 namespace Psycho {
-	class MyPlayer : ModPlayer {
+	class PsychoPlayer : ModPlayer {
 		public bool HasEnteredWorld = false;
 
 
@@ -13,7 +13,7 @@ namespace Psycho {
 		}
 
 		public override void clientClone( ModPlayer client_clone ) {
-			var clone = (MyPlayer)client_clone;
+			var clone = (PsychoPlayer)client_clone;
 			clone.HasEnteredWorld = this.HasEnteredWorld;
 		}
 

@@ -1,6 +1,6 @@
 ﻿using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.Utilities.Config;
-using Psycho.NetProtocol;
+using Psycho.NetProtocols;
 using System;
 using System.IO;
 using Terraria;
@@ -22,14 +22,15 @@ namespace Psycho {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
 			if( PsychoMod.Instance != null ) {
-				PsychoMod.Instance.Config.LoadFile();
+				PsychoMod.Instance.Config.ConfigJson();
 			}
 		}
 
 
 		////////////////
 
-		public JsonConfig<PsychoConfigData> Config { get; private set; }
+		public JsonConfig<PsychoConfigData> ConfigJson { get; private set; }
+		public PsychoConfigData Config { get { return this.ConfigJson.Data; } }
 
 
 		////////////////
@@ -41,7 +42,7 @@ namespace Psycho {
 				AutoloadSounds = true
 			};
 			
-			this.Config = new JsonConfig<PsychoConfigData>( PsychoConfigData.ConfigFileName,
+			this.ConfigJson = new JsonConfig<PsychoConfigData>( PsychoConfigData.ConfigFileName,
 				ConfigurationDataBase.RelativePath, new PsychoConfigData() );
 		}
 
@@ -58,25 +59,14 @@ namespace Psycho {
 		}
 
 		private void LoadConfig() {
-			try {
-				if( !this.Config.LoadFile() ) {
-					this.Config.SaveFile();
-				}
-			} catch( Exception e ) {
-				DebugHelpers.Log( e.Message );
-				this.Config.SaveFile();
+			if( !this.ConfigJson.LoadFile() ) {
+				this.ConfigJson.SaveFile();
 			}
 
-			if( this.Config.Data.UpdateToLatestVersion() ) {
+			if( this.Config.UpdateToLatestVersion() ) {
 				ErrorLogger.Log( "Psycho updated to " + PsychoConfigData.ConfigVersion.ToString() );
-				this.Config.SaveFile();
+				this.ConfigJson.SaveFile();
 			}
-		}
-
-		////////////////
-
-		public override void PostSetupContent() {
-			PsychoInfo.RegisterInfoType<PsychoInfo>();
 		}
 
 
@@ -88,13 +78,6 @@ namespace Psycho {
 			} else if( Main.netMode == 2 ) {    // Server
 				ServerPacketHandlers.HandlePacket( this, reader, player_who );
 			}
-		}
-
-
-		////////////////
-
-		public bool IsDebugInfo() {
-			return (this.Config.Data.DEBUGMODE & 1) > 0;
 		}
 	}
 }

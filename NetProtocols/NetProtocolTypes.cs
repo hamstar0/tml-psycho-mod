@@ -1,4 +1,4 @@
-﻿namespace Psycho.NetProtocol {
+﻿namespace Psycho.NetProtocols {
 	public enum NetProtocolTypes : byte {
 		RequestModSettings,
 		ModSettings
