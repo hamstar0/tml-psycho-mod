@@ -52,9 +52,25 @@ namespace Psycho {
 			}
 		}
 
+
 		////////////////
 
+		public void UpdateSingle( NPC npc ) {
+			this.UpdateLocal( npc );
+			this.UpdateWorld( npc );
+		}
+
+		public void UpdateClient( NPC npc ) {
+			this.UpdateLocal( npc );
+		}
+
 		public void UpdateServer( NPC npc ) {
+			this.UpdateWorld( npc );
+		}
+
+		////////////////
+
+		private void UpdateLocal( NPC npc ) {
 			float max_distance = 16 * 200;    // Proximity to underground player
 
 			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
@@ -66,20 +82,26 @@ DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
 					Main.musicVolume = scale;
 				}
 			}
+		}
+
+		private void UpdateWorld( NPC npc ) {
+			float max_distance = 16 * 200;    // Proximity to underground player
 
 			for( int i = 0; i < Main.player.Length; i++ ) {
 				Player player = Main.player[i];
 				if( player == null || !player.active ) { continue; }
 
 				if( Math.Abs( Vector2.Distance( npc.position, player.position ) ) <= max_distance ) {
-					this.UpdateNearPlayer( npc ); // At most once per frame, when relevant
+					this.UpdateHeal( npc ); // At most once per frame, when relevant
 					break;
 				}
 			}
 		}
 
 
-		private void UpdateNearPlayer( NPC npc ) {
+		////////////////
+
+		private void UpdateHeal( NPC npc ) {
 			var mymod = (PsychoMod)this.mod;
 
 			if( npc.life < npc.lifeMax ) {

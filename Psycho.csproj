@@ -61,7 +61,7 @@
     <Compile Include="PsychoNpc.cs" />
     <Compile Include="PsychoPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PsychoNpc_Heal.cs" />
+    <Compile Include="PsychoNpc_Behavior.cs" />
     <Compile Include="PsychoMod.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -55,7 +55,13 @@ namespace Psycho {
 			}
 
 			if( this.IsInitialized && Main.netMode != 1 ) {
-				this.UpdateServer( npc );
+				if( Main.netMode == 2 ) {
+					this.UpdateServer( npc );
+				} else if( Main.netMode == 1 ) {
+					this.UpdateClient( npc );
+				} else {
+					this.UpdateSingle( npc );
+				}
 			}
 
 			return base.PreAI( npc );
