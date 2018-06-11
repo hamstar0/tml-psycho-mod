@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.WorldHelpers;
+﻿using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.WorldHelpers;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -14,6 +15,7 @@ namespace Psycho {
 			return !( WorldHelpers.IsAboveWorldSurface( pos ) || WorldHelpers.IsWithinUnderworld( pos ) );
 		}
 
+
 		public static bool CanSpawn( PsychoConfigData config, NPCSpawnInfo spawn_info ) {
 			var pos = spawn_info.player.position;
 			if( WorldHelpers.IsAboveWorldSurface( pos ) || WorldHelpers.IsWithinUnderworld( pos ) ) {
@@ -21,7 +23,8 @@ namespace Psycho {
 			}
 
 			foreach( int buff_id in config.PsychoWardingNeedsBuffs ) {
-				if( spawn_info.player.FindBuffIndex(buff_id) == -1 ) {
+				int idx = spawn_info.player.FindBuffIndex( buff_id );
+				if( idx == -1 || spawn_info.player.buffTime[idx] <= 0 ) {
 					return true;
 				}
 			}
@@ -45,19 +48,30 @@ namespace Psycho {
 			var mymod = (PsychoMod)ModLoader.GetMod( "Psycho" );
 			if( mymod.Config.DebugModeInfo ) {
 				Main.NewText( "Psycho "+npc.whoAmI+" spawned at " + npc.position );
+				LogHelpers.Log( "Psycho " + npc.whoAmI + " spawned at " + npc.position );
 			}
 		}
 
 		////////////////
 
-		public void UpdateHeal( NPC npc ) {
-			int distance = 16 * 200;    // Proximity to underground player
+		public void UpdateServer( NPC npc ) {
+			float max_distance = 16 * 200;    // Proximity to underground player
+
+			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
+				float dist = Math.Abs( Vector2.Distance( npc.position, Main.LocalPlayer.position ) );
+				float scale = dist / ( max_distance * 0.5f );
+
+DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
+				if( scale < 1f ) {
+					Main.musicVolume = scale;
+				}
+			}
 
 			for( int i = 0; i < Main.player.Length; i++ ) {
 				Player player = Main.player[i];
 				if( player == null || !player.active ) { continue; }
 
-				if( Math.Abs( Vector2.Distance( npc.position, player.position ) ) <= distance ) {
+				if( Math.Abs( Vector2.Distance( npc.position, player.position ) ) <= max_distance ) {
 					this.UpdateNearPlayer( npc ); // At most once per frame, when relevant
 					break;
 				}

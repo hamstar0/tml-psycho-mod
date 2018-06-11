@@ -25,8 +25,8 @@ namespace Psycho {
 		public int[] PsychoWardingNeedsBuffs = new int[] {
 			//BuffID.HeartLamp,
 			//BuffID.Sunflower,
-			BuffID.StarInBottle,
-			BuffID.Campfire
+			BuffID.StarInBottle
+			//BuffID.Campfire
 		};
 		
 

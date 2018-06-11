@@ -25,7 +25,7 @@ namespace Psycho {
 
 		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawn_info ) {
 			var config = ((PsychoMod)this.mod).Config;
-
+			
 			if( PsychoNpc.CanSpawn( config, spawn_info ) ) {
 				pool[NPCID.Psycho] = config.PsychoSpawnChance;
 			}
@@ -54,8 +54,8 @@ namespace Psycho {
 				}
 			}
 
-			if( this.IsInitialized && Main.netMode == 2 ) {
-				this.UpdateHeal( npc );
+			if( this.IsInitialized && Main.netMode != 1 ) {
+				this.UpdateServer( npc );
 			}
 
 			return base.PreAI( npc );
