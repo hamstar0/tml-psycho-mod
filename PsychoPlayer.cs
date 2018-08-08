@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Utilities.Network;
+﻿using HamstarHelpers.Components.Network;
 using Psycho.NetProtocols;
 using Terraria;
 using Terraria.ModLoader;
@@ -28,7 +28,9 @@ namespace Psycho {
 				if( !mymod.ConfigJson.LoadFile() ) {
 					mymod.ConfigJson.SaveFile();
 				}
+			}
 
+			if( Main.netMode == 0 ) {
 				this.HasEnteredWorld = true;
 			} else if( Main.netMode == 1 ) {
 				PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();

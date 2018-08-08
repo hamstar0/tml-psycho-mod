@@ -1,5 +1,4 @@
-﻿using HamstarHelpers.DebugHelpers;
-using HamstarHelpers.Utilities.Config;
+﻿using HamstarHelpers.Components.Config;
 using System;
 using System.IO;
 using Terraria;
@@ -21,8 +20,22 @@ namespace Psycho {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
 			if( PsychoMod.Instance != null ) {
-				PsychoMod.Instance.ConfigJson.LoadFile();
+				if( !PsychoMod.Instance.ConfigJson.LoadFile() ) {
+					PsychoMod.Instance.ConfigJson.SaveFile();
+				}
 			}
+		}
+
+		public static void ResetConfigFromDefaults() {
+			if( Main.netMode != 0 ) {
+				throw new Exception( "Cannot reset to default configs outside of single player." );
+			}
+
+			var new_config = new PsychoConfigData();
+			//new_config.SetDefaults();
+
+			PsychoMod.Instance.ConfigJson.SetData( new_config );
+			PsychoMod.Instance.ConfigJson.SaveFile();
 		}
 
 
@@ -50,12 +63,6 @@ namespace Psycho {
 		////////////////
 
 		public override void Load() {
-			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
-			var min_vers = new Version( 1, 2, 0 );
-			if( hamhelpmod.Version < min_vers ) {
-				throw new Exception( "Hamstar Helpers must be version " + min_vers.ToString() + " or greater." );
-			}
-
 			this.LoadConfig();
 		}
 

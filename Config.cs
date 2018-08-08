@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Utilities.Config;
+﻿using HamstarHelpers.Components.Config;
 using System;
 using Terraria.ID;
 
@@ -22,12 +22,19 @@ namespace Psycho {
 		public int PsychoHealAmount = 50;
 		public bool PsychoCanDropLoot = true;
 
-		public int[] PsychoWardingNeedsBuffs = new int[] {
-			//BuffID.HeartLamp,
-			//BuffID.Sunflower,
-			BuffID.StarInBottle
-			//BuffID.Campfire
-		};
+		public int[] PsychoWardingNeedsBuffs = new int[0];
+
+
+		////////////////
+
+		private void SetDefaults() {
+			this.PsychoWardingNeedsBuffs = new int[] {
+				//BuffID.HeartLamp,
+				//BuffID.Sunflower,
+				BuffID.StarInBottle
+				//BuffID.Campfire
+			};
+		}
 		
 
 		////////////////
@@ -41,36 +48,14 @@ namespace Psycho {
 			if( vers_since >= PsychoConfigData.ConfigVersion ) {
 				return false;
 			}
-
-			if( vers_since < new Version( 1, 0, 1 ) ) {
-				if( PsychoConfigData._1_0_0_PsychoSpawnChance == this.PsychoSpawnChance ) {
-					this.PsychoSpawnChance = new_config.PsychoSpawnChance;
-				}
-			}
-			if( vers_since < new Version( 1, 0, 2 ) ) {
-				if( PsychoConfigData._1_0_1_PsychoSpawnChance == this.PsychoSpawnChance ) {
-					this.PsychoSpawnChance = new_config.PsychoSpawnChance;
-				}
-			}
-			if( vers_since < new Version( 1, 1, 0 ) ) {
-				if( PsychoConfigData._1_0_2_PsychoSpawnChance == this.PsychoSpawnChance ) {
-					this.PsychoSpawnChance = new_config.PsychoSpawnChance;
-				}
+			
+			if( this.VersionSinceUpdate == "" ) {
+				this.SetDefaults();
 			}
 
 			this.VersionSinceUpdate = PsychoConfigData.ConfigVersion.ToString();
 
 			return true;
 		}
-
-		////////////////
-
-		public string _OLD_SETTINGS_BELOW = "";
-
-		public bool PsychoWardedByHeartLantern = true;
-
-		public readonly static float _1_0_0_PsychoSpawnChance = 0.02f;
-		public readonly static float _1_0_1_PsychoSpawnChance = 0.04f;
-		public readonly static float _1_0_2_PsychoSpawnChance = 0.015f;
 	}
 }

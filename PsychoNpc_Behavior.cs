@@ -1,10 +1,12 @@
-﻿using HamstarHelpers.DebugHelpers;
-using HamstarHelpers.WorldHelpers;
+﻿using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.MiscHelpers;
+using HamstarHelpers.Helpers.WorldHelpers;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Audio;
 
 
 namespace Psycho {
@@ -71,21 +73,19 @@ namespace Psycho {
 		////////////////
 
 		private void UpdateLocal( NPC npc ) {
-			float max_distance = 16 * 200;    // Proximity to underground player
+			float max_distance = 16 * 25;    // Proximity to underground player
 
 			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
 				float dist = Math.Abs( Vector2.Distance( npc.position, Main.LocalPlayer.position ) );
-				float scale = dist / ( max_distance * 0.5f );
+				float scale = MathHelper.Clamp( (dist / max_distance) - 0.25f, 0f, 1f );
 
-DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
-				if( scale < 1f ) {
-					Main.musicVolume = scale;
-				}
+//DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
+				MusicHelpers.SetVolumeScale( scale );
 			}
 		}
 
 		private void UpdateWorld( NPC npc ) {
-			float max_distance = 16 * 200;    // Proximity to underground player
+			float max_distance = 16 * 150;    // Proximity to underground player
 
 			for( int i = 0; i < Main.player.Length; i++ ) {
 				Player player = Main.player[i];
