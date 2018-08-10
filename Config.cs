@@ -48,9 +48,13 @@ namespace Psycho {
 			if( vers_since >= PsychoConfigData.ConfigVersion ) {
 				return false;
 			}
-			
+
 			if( this.VersionSinceUpdate == "" ) {
 				this.SetDefaults();
+			}
+
+			if( vers_since < new Version(1, 3, 2, 1) ) {
+				this.PsychoSpawnChance = new_config.PsychoSpawnChance;
 			}
 
 			this.VersionSinceUpdate = PsychoConfigData.ConfigVersion.ToString();
