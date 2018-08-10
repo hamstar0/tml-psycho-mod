@@ -1,5 +1,5 @@
 author = hamstar
-version = 1.3.2
+version = 1.3.2.1
 displayName = Psycho!
 modReferences = HamstarHelpers@2.0.2
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*

@@ -5,7 +5,7 @@ using Terraria.ID;
 
 namespace Psycho {
 	public class PsychoConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 3, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 3, 2, 1 );
 		public readonly static string ConfigFileName = "Psycho Config.json";
 
 
@@ -17,7 +17,7 @@ namespace Psycho {
 
 		public bool DebugModeInfo = false;
 
-		public float PsychoSpawnChance = 0.018f;
+		public float PsychoSpawnChance = 0.03f; //0.018f;
 		public int PsychoHealRate = (int)(60f * 1.5f);
 		public int PsychoHealAmount = 50;
 		public bool PsychoCanDropLoot = true;
