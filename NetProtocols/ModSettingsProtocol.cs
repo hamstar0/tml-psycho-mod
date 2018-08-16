@@ -15,7 +15,7 @@ namespace Psycho.NetProtocols {
 
 		////////////////
 
-		protected override void SetServerDefaults() {
+		protected override void SetServerDefaults( int to_who ) {
 			this.Data = PsychoMod.Instance.Config;
 		}
 
