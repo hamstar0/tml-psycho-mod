@@ -9,6 +9,7 @@ namespace Psycho {
 		public bool HasEnteredWorld { get; internal set; }
 
 
+
 		////////////////
 
 		public override bool CloneNewInstances { get { return false; } }

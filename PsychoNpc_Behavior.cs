@@ -6,7 +6,6 @@ using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Audio;
 
 
 namespace Psycho {
@@ -18,13 +17,19 @@ namespace Psycho {
 		}
 
 
-		public static bool CanSpawn( PsychoConfigData config, NPCSpawnInfo spawn_info ) {
+		public static bool CanSpawnPsycho( NPCSpawnInfo spawn_info ) {
+			var mymod = PsychoMod.Instance;
+
+			if( mymod.Config.PsychoSpawnChance == 0 ) {
+				return false;
+			}
+
 			var pos = spawn_info.player.position;
 			if( WorldHelpers.IsAboveWorldSurface( pos ) || WorldHelpers.IsWithinUnderworld( pos ) ) {
 				return false;
 			}
 
-			foreach( int buff_id in config.PsychoWardingNeedsBuffs ) {
+			foreach( int buff_id in mymod.Config.PsychoWardingNeedsBuffs ) {
 				int idx = spawn_info.player.FindBuffIndex( buff_id );
 				if( idx == -1 || spawn_info.player.buffTime[idx] <= 0 ) {
 					return true;
@@ -34,11 +39,28 @@ namespace Psycho {
 			return false;
 		}
 
+		public static bool CanSpawnButcher( NPCSpawnInfo spawn_info ) {
+			var mymod = PsychoMod.Instance;
 
+			if( mymod.Config.ButcherSpawnChance == 0 ) {
+				return false;
+			}
 
-		////////////////
+			var pos = spawn_info.player.position;
+			if( !WorldHelpers.IsAboveWorldSurface( pos ) ) {
+				return false;
+			}
 
-		public int HealTimer { get; private set; }
+			foreach( int buff_id in mymod.Config.ButcherWardingNeedsBuffs ) {
+				int idx = spawn_info.player.FindBuffIndex( buff_id );
+				if( idx == -1 || spawn_info.player.buffTime[idx] <= 0 ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 
 
 		////////////////

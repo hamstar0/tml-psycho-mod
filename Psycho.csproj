@@ -37,6 +37,7 @@
     <Compile Include="API.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="NetProtocols\ModSettingsProtocol.cs" />
+    <Compile Include="PsychoMod_Meta.cs" />
     <Compile Include="PsychoMod.cs" />
     <Compile Include="PsychoNpc.cs" />
     <Compile Include="PsychoNpc_Behavior.cs" />

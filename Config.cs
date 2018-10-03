@@ -5,7 +5,6 @@ using Terraria.ID;
 
 namespace Psycho {
 	public class PsychoConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 3, 2, 1 );
 		public readonly static string ConfigFileName = "Psycho Config.json";
 
 
@@ -17,12 +16,18 @@ namespace Psycho {
 
 		public bool DebugModeInfo = false;
 
-		public float PsychoSpawnChance = 0.03f; //0.018f;
-		public int PsychoHealRate = (int)(60f * 1.5f);
+		public int PsychoHealRate = (int)( 60f * 1.5f );
 		public int PsychoHealAmount = 50;
+
+		public float PsychoSpawnChance = 0.03f; //0.018f;
 		public bool PsychoCanDropLoot = true;
+		
+		public float ButcherSpawnChance = 0.03f; //0.018f;
+		public bool ButcherCanDropLoot = true;
 
 		public int[] PsychoWardingNeedsBuffs = new int[0];
+		public int[] ButcherWardingNeedsBuffs = new int[0];
+		
 
 
 		////////////////
@@ -33,6 +38,11 @@ namespace Psycho {
 				//BuffID.Sunflower,
 				BuffID.StarInBottle
 				//BuffID.Campfire
+			};
+
+			this.ButcherWardingNeedsBuffs = new int[] {
+				//BuffID.HeartLamp,
+				BuffID.StarInBottle
 			};
 		}
 		
@@ -45,7 +55,7 @@ namespace Psycho {
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
 
-			if( vers_since >= PsychoConfigData.ConfigVersion ) {
+			if( vers_since >= PsychoMod.Instance.Version ) {
 				return false;
 			}
 
@@ -57,7 +67,11 @@ namespace Psycho {
 				this.PsychoSpawnChance = new_config.PsychoSpawnChance;
 			}
 
-			this.VersionSinceUpdate = PsychoConfigData.ConfigVersion.ToString();
+			if( vers_since < new Version(1, 4, 0) ) {
+				this.SetDefaults();
+			}
+
+			this.VersionSinceUpdate = PsychoMod.Instance.Version.ToString();
 
 			return true;
 		}
