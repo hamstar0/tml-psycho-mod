@@ -71,12 +71,6 @@ namespace Psycho {
 			this.HealTimer = 0;
 
 			var mymod = (PsychoMod)ModLoader.GetMod( "Psycho" );
-
-			switch( npc.type ) {
-			case NPCID.Butcher:
-				Main.PlaySound( SoundID.Item22, npc.position );
-				break;
-			}
 			
 			if( mymod.Config.DebugModeInfo ) {
 				Main.NewText( npc.TypeName+" " +npc.whoAmI+" spawned at " + npc.position );
@@ -117,8 +111,8 @@ namespace Psycho {
 				Rectangle butcher_rect = npc.getRect();
 
 				if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
-					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 9, () => {
-						Main.PlaySound( SoundID.Item23.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item23.Style, 0.65f );
+					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 25, () => {
+						Main.PlaySound( SoundID.Item22.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item22.Style, 0.65f );
 						return false;
 					} );
 				}

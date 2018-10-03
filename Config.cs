@@ -22,7 +22,7 @@ namespace Psycho {
 		public float PsychoSpawnChance = 0.03f; //0.018f;
 		public bool PsychoCanDropLoot = true;
 		
-		public float ButcherSpawnChance = 0.03f; //0.018f;
+		public float ButcherSpawnChance = 0.005f;
 		public bool ButcherCanDropLoot = true;
 
 		public int[] PsychoWardingNeedsBuffs = new int[0];
@@ -69,6 +69,9 @@ namespace Psycho {
 
 			if( vers_since < new Version(1, 4, 0) ) {
 				this.SetDefaults();
+			}
+			if( vers_since < new Version( 1, 4, 0, 1 ) ) {
+				this.ButcherSpawnChance = new_config.ButcherSpawnChance;
 			}
 
 			this.VersionSinceUpdate = PsychoMod.Instance.Version.ToString();
