@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.MiscHelpers;
 using HamstarHelpers.Helpers.WorldHelpers;
+using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -70,9 +71,16 @@ namespace Psycho {
 			this.HealTimer = 0;
 
 			var mymod = (PsychoMod)ModLoader.GetMod( "Psycho" );
+
+			switch( npc.type ) {
+			case NPCID.Butcher:
+				Main.PlaySound( SoundID.Item22, npc.position );
+				break;
+			}
+			
 			if( mymod.Config.DebugModeInfo ) {
-				Main.NewText( "Psycho "+npc.whoAmI+" spawned at " + npc.position );
-				LogHelpers.Log( "Psycho " + npc.whoAmI + " spawned at " + npc.position );
+				Main.NewText( npc.TypeName+" " +npc.whoAmI+" spawned at " + npc.position );
+				LogHelpers.Log( npc.TypeName+" " + npc.whoAmI + " spawned at " + npc.position );
 			}
 		}
 
@@ -103,6 +111,17 @@ namespace Psycho {
 
 //DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
 				MusicHelpers.SetVolumeScale( scale );
+			}
+
+			if( npc.type == NPCID.Butcher ) {
+				Rectangle butcher_rect = npc.getRect();
+
+				if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
+					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 9, () => {
+						Main.PlaySound( SoundID.Item23.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item23.Style, 0.65f );
+						return false;
+					} );
+				}
 			}
 		}
 

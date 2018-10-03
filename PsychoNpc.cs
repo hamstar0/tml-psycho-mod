@@ -64,7 +64,8 @@ namespace Psycho {
 
 			if( !this.IsInitialized ) {
 				this.IsInitialized = true;
-				if( npc.type == NPCID.Psycho ) {
+
+				if( npc.type == NPCID.Psycho || npc.type == NPCID.Butcher ) {
 					this.Initialize( npc );
 				}
 			}
