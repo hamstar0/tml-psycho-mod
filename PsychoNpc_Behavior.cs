@@ -81,22 +81,38 @@ namespace Psycho {
 
 		////////////////
 
-		public void UpdateSingle( NPC npc ) {
-			this.UpdateLocal( npc );
-			this.UpdateWorld( npc );
+		public void PreUpdateSingle( NPC npc ) {
+			this.PreUpdateLocal( npc );
+			this.PreUpdateWorld( npc );
 		}
 
-		public void UpdateClient( NPC npc ) {
-			this.UpdateLocal( npc );
+		public void PreUpdateClient( NPC npc ) {
+			this.PreUpdateLocal( npc );
 		}
 
-		public void UpdateServer( NPC npc ) {
-			this.UpdateWorld( npc );
+		public void PreUpdateServer( NPC npc ) {
+			this.PreUpdateWorld( npc );
 		}
+		
+		////////////////
+
+		public void PostUpdateSingle( NPC npc ) {
+			this.PostUpdateLocal( npc );
+			this.PostUpdateWorld( npc );
+		}
+
+		public void PostUpdateClient( NPC npc ) {
+			this.PostUpdateLocal( npc );
+		}
+
+		public void PostUpdateServer( NPC npc ) {
+			this.PostUpdateWorld( npc );
+		}
+
 
 		////////////////
 
-		private void UpdateLocal( NPC npc ) {
+		private void PreUpdateLocal( NPC npc ) {
 			float max_distance = 16 * 25;    // Proximity to underground player
 
 			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
@@ -111,7 +127,7 @@ namespace Psycho {
 				Rectangle butcher_rect = npc.getRect();
 
 				if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
-					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 25, () => {
+					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 23 + Main.rand.Next(0, 3), () => {
 						Main.PlaySound( SoundID.Item22.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item22.Style, 0.65f );
 						return false;
 					} );
@@ -119,7 +135,8 @@ namespace Psycho {
 			}
 		}
 
-		private void UpdateWorld( NPC npc ) {
+
+		private void PreUpdateWorld( NPC npc ) {
 			float max_distance = 16 * 150;    // Proximity to underground player
 
 			for( int i = 0; i < Main.player.Length; i++ ) {
@@ -131,40 +148,20 @@ namespace Psycho {
 					break;
 				}
 			}
+
+			this._WasDay = Main.dayTime;
+			Main.dayTime = false;
 		}
 
 
 		////////////////
 
-		private void UpdateHeal( NPC npc ) {
-			var mymod = (PsychoMod)this.mod;
-
-			if( npc.life < npc.lifeMax ) {
-				if( this.HealTimer >= mymod.Config.PsychoHealRate ) {
-					this.HealTimer = 0;
-					this.HealMe( npc );
-				} else {
-					this.HealTimer++;
-				}
-			} else {
-				this.HealTimer = 0;
-			}
+		private void PostUpdateLocal( NPC npc ) {
 		}
 
 
-		public void HealMe( NPC npc ) {
-			var mymod = (PsychoMod)this.mod;
-			int new_life = Math.Min( npc.life + mymod.Config.PsychoHealAmount, npc.lifeMax );
-			int healed = new_life - npc.life;
-
-			npc.life = new_life;
-
-			if( healed > 0 ) {
-				int ct = CombatText.NewText( npc.getRect(), Color.Green, "+" + healed );
-				Main.combatText[ct].lifeTime = 60;
-
-				npc.netUpdate = true;
-			}
+		private void PostUpdateWorld( NPC npc ) {
+			Main.dayTime = this._WasDay;
 		}
 	}
 }

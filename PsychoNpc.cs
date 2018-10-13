@@ -7,17 +7,21 @@ using Terraria;
 namespace Psycho {
 	partial class PsychoNpc : GlobalNPC {
 		private bool IsInitialized = false;
+		private bool _WasDay = Main.dayTime;
+
 
 		////
 
 		public int HealTimer { get; private set; }
+		
+		////
+
+		public override bool InstancePerEntity => true;
+		public override bool CloneNewInstances => true;
 
 
 
 		////////////////
-
-		public override bool InstancePerEntity => true;
-		public override bool CloneNewInstances => true;
 
 		public override GlobalNPC Clone() {
 			var clone = (PsychoNpc)base.Clone();
@@ -70,17 +74,30 @@ namespace Psycho {
 				}
 			}
 
-			if( this.IsInitialized && Main.netMode != 1 ) {
+			if( this.IsInitialized ) {
 				if( Main.netMode == 2 ) {
-					this.UpdateServer( npc );
+					this.PreUpdateServer( npc );
 				} else if( Main.netMode == 1 ) {
-					this.UpdateClient( npc );
+					this.PreUpdateClient( npc );
 				} else {
-					this.UpdateSingle( npc );
+					this.PreUpdateSingle( npc );
 				}
 			}
 
 			return base.PreAI( npc );
+		}
+
+
+		public override void AI( NPC npc ) {
+			if( this.IsInitialized ) {
+				if( Main.netMode == 2 ) {
+					this.PostUpdateServer( npc );
+				} else if( Main.netMode == 1 ) {
+					this.PostUpdateClient( npc );
+				} else {
+					this.PostUpdateSingle( npc );
+				}
+			}
 		}
 	}
 }
