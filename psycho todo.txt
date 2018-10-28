@@ -1,6 +1,17 @@
+v1.5
+-	Spawn The Possessed where there's lots of walls (25% chance instead of Psychos)
+-	Spawn Skeleton Snipers in the jungle (25% chance instead of Psychos)
+
+...
+
 v1.1.0
+
 -	@Test (use debug info)
 
+
+
 -	Add campfire warding
+
 -	Update for latest Hamstar's Helpers (use AltNPCInfo)
+
 -	Update for TML v0.10.1

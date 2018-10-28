@@ -42,6 +42,9 @@ namespace Psycho {
 			if( !Main.eclipse && PsychoNpc.CanSpawnButcher( spawn_info ) ) {
 				pool[ NPCID.Butcher ] = mymod.Config.ButcherSpawnChance;
 			}
+			if( PsychoNpc.CanSpawnSniper( spawn_info ) ) {
+				pool[ NPCID.SkeletonSniper ] = mymod.Config.SniperSpawnChance;
+			}
 		}
 
 
@@ -53,6 +56,8 @@ namespace Psycho {
 				return mymod.Config.PsychoCanDropLoot;
 			case NPCID.Butcher:
 				return mymod.Config.ButcherCanDropLoot;
+			case NPCID.SkeletonSniper:
+				return mymod.Config.SniperCanDropLoot;
 			}
 
 			return base.PreNPCLoot( npc );
@@ -60,7 +65,7 @@ namespace Psycho {
 
 
 		public override bool PreAI( NPC npc ) {
-			if( npc.type != NPCID.Psycho && (npc.type != NPCID.Butcher || Main.eclipse) ) {
+			if( !PsychoNpc.IsOurPsycho(npc) && !PsychoNpc.IsOurButcher(npc) && !PsychoNpc.IsOurSniper(npc) ) {
 				return base.PreAI( npc );
 			}
 
@@ -69,7 +74,7 @@ namespace Psycho {
 			if( !this.IsInitialized ) {
 				this.IsInitialized = true;
 
-				if( npc.type == NPCID.Psycho || npc.type == NPCID.Butcher ) {
+				if( npc.type == NPCID.Psycho || npc.type == NPCID.Butcher || npc.type == NPCID.SkeletonSniper ) {
 					this.Initialize( npc );
 				}
 			}

@@ -2,14 +2,17 @@
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 
 namespace Psycho {
 	partial class PsychoNpc : GlobalNPC {
 		private void UpdateHeal( NPC npc ) {
-			var mymod = (PsychoMod)this.mod;
+			if( npc.type == NPCID.SkeletonSniper ) { return; }
 
+			var mymod = (PsychoMod)this.mod;
+			
 			if( npc.life < npc.lifeMax ) {
 				if( this.HealTimer >= mymod.Config.PsychoHealRate ) {
 					this.HealTimer = 0;

@@ -22,11 +22,16 @@ namespace Psycho {
 		public float PsychoSpawnChance = 0.03f; //0.018f;
 		public bool PsychoCanDropLoot = true;
 		
-		public float ButcherSpawnChance = 0.005f;
+		public float ButcherSpawnChance = 0.0025f;
 		public bool ButcherCanDropLoot = true;
+
+		public float SniperSpawnChance = 0.015f;
+		public bool SniperJungleOnly = true;
+		public bool SniperCanDropLoot = false;
 
 		public int[] PsychoWardingNeedsBuffs = new int[0];
 		public int[] ButcherWardingNeedsBuffs = new int[0];
+		public int[] SniperWardingNeedsBuffs = new int[0];
 		
 
 
@@ -44,6 +49,11 @@ namespace Psycho {
 				//BuffID.HeartLamp,
 				BuffID.StarInBottle
 			};
+
+			this.SniperWardingNeedsBuffs = new int[] {
+				//BuffID.HeartLamp,
+				BuffID.StarInBottle
+			};
 		}
 		
 
@@ -51,6 +61,8 @@ namespace Psycho {
 
 		public bool UpdateToLatestVersion() {
 			var new_config = new PsychoConfigData();
+			new_config.SetDefaults();
+
 			var vers_since = this.VersionSinceUpdate != "" ?
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
@@ -72,6 +84,15 @@ namespace Psycho {
 			}
 			if( vers_since < new Version( 1, 4, 0, 1 ) ) {
 				this.ButcherSpawnChance = new_config.ButcherSpawnChance;
+			}
+			if( vers_since < new Version( 1, 4, 2 ) ) {
+				if( this.ButcherSpawnChance == 0.005f ) {
+					this.ButcherSpawnChance = new_config.ButcherSpawnChance;
+				}
+			}
+			if( vers_since < new Version(1, 5, 0) ) {
+				this.ButcherWardingNeedsBuffs = new_config.ButcherWardingNeedsBuffs;
+				this.SniperWardingNeedsBuffs = new_config.SniperWardingNeedsBuffs;
 			}
 
 			this.VersionSinceUpdate = PsychoMod.Instance.Version.ToString();
