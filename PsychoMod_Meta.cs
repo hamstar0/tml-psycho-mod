@@ -8,15 +8,6 @@ using Terraria.ModLoader;
 
 namespace Psycho {
     partial class PsychoMod : Mod {
-		public static IList<Tuple<string, string>> RecommendedMods => new List<Tuple<string, string>> {
-			Tuple.Create( "DeathPenalty", "Penalizes dying with permanent loss." ),
-			Tuple.Create( "Lives", "Guess." ),
-			Tuple.Create( "TerrariaOverhaul", "Lots of added gore and drama, if drama is what you seek." )
-		};
-
-
-		////////////////
-
 		public static string GithubUserName { get { return "hamstar0"; } }
 		public static string GithubProjectName { get { return "tml-psycho-mod"; } }
 

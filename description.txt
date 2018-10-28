@@ -1,3 +1,9 @@
 You are now being randomly stalked by a deadly psycho. Hilarity may ensue. Should liven up caving.
 * Use Star-in-a-Bottle to for psycho warding.
 * Config file: Documents/My Games/Terraria/ModLoader/Mod Configs/Psycho Config.json
+
+
+Mod recommendations:
+DeathPenalty - Penalizes dying with permanent loss.
+Lives - Guess.
+TerrariaOverhaul - Lots of added gore and drama, among other stuff.

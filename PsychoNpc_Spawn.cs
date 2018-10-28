@@ -135,7 +135,7 @@ namespace Psycho {
 				this.InitializeSniper( npc );
 			}
 			
-			if( PsychoMod.Instance.Config.DebugModeInfo ) {
+			if( mymod.Config.DebugModeInfo ) {
 				Main.NewText( npc.TypeName+" " +npc.whoAmI+" spawned at " + npc.position );
 				LogHelpers.Log( npc.TypeName+" " + npc.whoAmI + " spawned at " + npc.position );
 			}
@@ -144,7 +144,7 @@ namespace Psycho {
 
 		public void InitializeSniper( NPC npc ) {
 			npc.life = npc.lifeMax = 10;
-			npc.defense = 200;
+			npc.defense = 300;
 			npc.damage = Main.expertMode ? 600 : 300;
 		}
 	}
