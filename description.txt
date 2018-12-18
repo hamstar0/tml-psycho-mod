@@ -4,6 +4,6 @@ You are now being randomly stalked by a deadly psycho. Hilarity may ensue. Shoul
 
 
 Mod recommendations:
-DeathPenalty - Penalizes dying with permanent loss.
-Lives - Guess.
-TerrariaOverhaul - Lots of added gore and drama, among other stuff.
+DeathPenalty = Penalizes dying with permanent loss.
+Lives = Guess.
+TerrariaOverhaul = Lots of added gore and drama, among other stuff.
