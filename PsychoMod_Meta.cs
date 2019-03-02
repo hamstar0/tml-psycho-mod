@@ -8,8 +8,8 @@ using Terraria.ModLoader;
 
 namespace Psycho {
     partial class PsychoMod : Mod {
-		public static string GithubUserName { get { return "hamstar0"; } }
-		public static string GithubProjectName { get { return "tml-psycho-mod"; } }
+		public static string GithubUserName => "hamstar0";
+		public static string GithubProjectName => "tml-psycho-mod";
 
 		public static string ConfigFileRelativePath {
 			get { return ConfigurationDataBase.RelativePath + Path.DirectorySeparatorChar + PsychoConfigData.ConfigFileName; }
@@ -30,10 +30,10 @@ namespace Psycho {
 				throw new Exception( "Cannot reset to default configs outside of single player." );
 			}
 
-			var new_config = new PsychoConfigData();
-			//new_config.SetDefaults();
+			var newConfig = new PsychoConfigData();
+			//newConfig.SetDefaults();
 
-			PsychoMod.Instance.ConfigJson.SetData( new_config );
+			PsychoMod.Instance.ConfigJson.SetData( newConfig );
 			PsychoMod.Instance.ConfigJson.SaveFile();
 		}
 	}

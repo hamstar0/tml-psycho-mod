@@ -13,8 +13,6 @@ namespace Psycho {
 		////
 
 		public int HealTimer { get; private set; }
-		
-		////
 
 		public override bool InstancePerEntity => true;
 		public override bool CloneNewInstances => true;
@@ -33,16 +31,16 @@ namespace Psycho {
 
 		////////////////
 
-		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawn_info ) {
+		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawnInfo ) {
 			var mymod = (PsychoMod)this.mod;
 			
-			if( PsychoNpc.CanSpawnPsycho( spawn_info ) ) {
+			if( PsychoNpc.CanSpawnPsycho( spawnInfo ) ) {
 				pool[ NPCID.Psycho ] = mymod.Config.PsychoSpawnChance;
 			}
-			if( !Main.eclipse && PsychoNpc.CanSpawnButcher( spawn_info ) ) {
+			if( PsychoNpc.CanSpawnButcher( spawnInfo ) ) {
 				pool[ NPCID.Butcher ] = mymod.Config.ButcherSpawnChance;
 			}
-			if( PsychoNpc.CanSpawnSniper( spawn_info ) ) {
+			if( PsychoNpc.CanSpawnSniper( spawnInfo ) ) {
 				pool[ NPCID.SkeletonSniper ] = mymod.Config.SniperSpawnChance;
 			}
 		}

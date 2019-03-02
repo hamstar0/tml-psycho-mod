@@ -1,5 +1,4 @@
 ﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.Components.Network.Data;
 using Terraria;
 
 
@@ -7,10 +6,11 @@ namespace Psycho.NetProtocols {
 	class ModSettingsProtocol : PacketProtocolRequestToServer {
 		public PsychoConfigData Data;
 
+		
 
 		////////////////
 
-		protected ModSettingsProtocol( PacketProtocolDataConstructorLock ctor_lock ) : base( ctor_lock ) { }
+		private ModSettingsProtocol() { }
 
 
 		////////////////

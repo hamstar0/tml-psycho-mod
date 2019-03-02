@@ -28,10 +28,10 @@ namespace Psycho {
 
 		public void HealMe( NPC npc ) {
 			var mymod = (PsychoMod)this.mod;
-			int new_life = Math.Min( npc.life + mymod.Config.PsychoHealAmount, npc.lifeMax );
-			int healed = new_life - npc.life;
+			int newLife = Math.Min( npc.life + mymod.Config.PsychoHealAmount, npc.lifeMax );
+			int healed = newLife - npc.life;
 
-			npc.life = new_life;
+			npc.life = newLife;
 
 			if( healed > 0 ) {
 				int ct = CombatText.NewText( npc.getRect(), Color.Green, "+" + healed );

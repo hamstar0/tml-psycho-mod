@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Components.Config;
+using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
 using Terraria.ModLoader;
 
 
@@ -11,7 +12,7 @@ namespace Psycho {
 		////////////////
 
 		public JsonConfig<PsychoConfigData> ConfigJson { get; private set; }
-		public PsychoConfigData Config { get { return this.ConfigJson.Data; } }
+		public PsychoConfigData Config => this.ConfigJson.Data;
 
 
 
@@ -43,6 +44,13 @@ namespace Psycho {
 
 		public override void Unload() {
 			PsychoMod.Instance = null;
+		}
+
+
+		////////////////
+
+		public override object Call( params object[] args ) {
+			return ModBoilerplateHelpers.HandleModCall( typeof(PsychoAPI), args );
 		}
 	}
 }

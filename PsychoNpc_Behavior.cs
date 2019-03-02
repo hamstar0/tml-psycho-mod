@@ -54,7 +54,7 @@ namespace Psycho {
 			}
 
 			if( npc.type == NPCID.Butcher ) {
-				Rectangle butcher_rect = npc.getRect();
+				Rectangle butcherRect = npc.getRect();
 
 				if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
 					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 23 + Main.rand.Next(0, 3), () => {
@@ -67,13 +67,13 @@ namespace Psycho {
 
 
 		private void PreUpdateWorld( NPC npc ) {
-			float max_distance = 16 * 150;    // Proximity to underground player
+			float maxDistance = 16 * 150;    // Proximity to underground player
 
 			for( int i = 0; i < Main.player.Length; i++ ) {
 				Player player = Main.player[i];
 				if( player == null || !player.active ) { continue; }
 
-				if( Math.Abs( Vector2.Distance( npc.position, player.position ) ) <= max_distance ) {
+				if( Math.Abs( Vector2.Distance( npc.position, player.position ) ) <= maxDistance ) {
 					this.UpdateHeal( npc ); // At most once per frame, when relevant
 					break;
 				}

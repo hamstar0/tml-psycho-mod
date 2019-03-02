@@ -1,5 +1,7 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.WorldHelpers;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,43 +29,54 @@ namespace Psycho {
 			if( npc.type != NPCID.SkeletonSniper ) { return false; }
 			if( !npc.HasPlayerTarget ) { return false; }
 
-			Player target_plr = Main.player[ npc.target ];
+			Player targetPlr = Main.player[ npc.target ];
 
-			return target_plr.ZoneJungle && !target_plr.ZoneDungeon;
+			return targetPlr.ZoneJungle && !targetPlr.ZoneDungeon;
 		}
 
 
 		////////////////
 
-		public static bool CanSpawnPsycho( NPCSpawnInfo spawn_info ) {
+		public static bool CanSpawnPsycho( NPCSpawnInfo spawnInfo ) {
 			if( Main.eclipse ) { return false; }
 
 			var mymod = PsychoMod.Instance;
+			if( mymod.Config.DebugModeInfo ) {
+				IEnumerable<string> buffIndexes = mymod.Config.PsychoWardingNeedsBuffs.Select(
+					idx => spawnInfo.player.FindBuffIndex( idx )+""
+				);
+				DebugHelpers.Print( "spawnpsycho", "sc:" + mymod.Config.PsychoSpawnChance
+					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
+					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
+					+ ", nb:" + mymod.Config.PsychoWardingNeedsBuffs.Length
+					+ ", b:" + string.Join( ",", buffIndexes ),
+					60
+				);
+			}
 
 			if( mymod.Config.PsychoSpawnChance == 0 ) {
 				return false;
 			}
 
-			var pos = spawn_info.player.position;
+			var pos = spawnInfo.player.position;
 			if( WorldHelpers.IsAboveWorldSurface( pos ) || WorldHelpers.IsWithinUnderworld( pos ) ) {
 				return false;
 			}
 			
 			if( mymod.Config.PsychoWardingNeedsBuffs.Length > 0 ) {
 				foreach( int buff_id in mymod.Config.PsychoWardingNeedsBuffs ) {
-					int idx = spawn_info.player.FindBuffIndex( buff_id );
-					if( idx == -1 || spawn_info.player.buffTime[idx] <= 0 ) {
-						return true;
+					int idx = spawnInfo.player.FindBuffIndex( buff_id );
+					if( idx != -1 && spawnInfo.player.buffTime[idx] > 0 ) {
+						return false;
 					}
 				}
-				return false;
 			}
 			
 			return true;
 		}
 
 
-		public static bool CanSpawnButcher( NPCSpawnInfo spawn_info ) {
+		public static bool CanSpawnButcher( NPCSpawnInfo spawnInfo ) {
 			if( Main.eclipse ) { return false; }
 
 			var mymod = PsychoMod.Instance;
@@ -72,15 +85,15 @@ namespace Psycho {
 				return false;
 			}
 
-			var pos = spawn_info.player.position;
+			var pos = spawnInfo.player.position;
 			if( !WorldHelpers.IsAboveWorldSurface( pos ) ) {
 				return false;
 			}
 
 			if( mymod.Config.ButcherWardingNeedsBuffs.Length > 0 ) {
 				foreach( int buff_id in mymod.Config.ButcherWardingNeedsBuffs ) {
-					int idx = spawn_info.player.FindBuffIndex( buff_id );
-					if( idx == -1 || spawn_info.player.buffTime[idx] <= 0 ) {
+					int idx = spawnInfo.player.FindBuffIndex( buff_id );
+					if( idx == -1 || spawnInfo.player.buffTime[idx] <= 0 ) {
 						return true;
 					}
 				}
@@ -91,10 +104,10 @@ namespace Psycho {
 		}
 
 
-		public static bool CanSpawnSniper( NPCSpawnInfo spawn_info ) {
-			if( spawn_info.player.ZoneDungeon ) { return false; }
+		public static bool CanSpawnSniper( NPCSpawnInfo spawnInfo ) {
+			if( spawnInfo.player.ZoneDungeon ) { return false; }
 
-			if( !PsychoNpc.CanSpawnPsycho(spawn_info) ) {
+			if( !PsychoNpc.CanSpawnPsycho(spawnInfo) ) {
 				return false;
 			}
 
@@ -104,14 +117,14 @@ namespace Psycho {
 				return false;
 			}
 
-			if( mymod.Config.SniperJungleOnly && !spawn_info.player.ZoneJungle ) {
+			if( mymod.Config.SniperJungleOnly && !spawnInfo.player.ZoneJungle ) {
 				return false;
 			}
 
 			if( mymod.Config.SniperWardingNeedsBuffs.Length > 0 ) {
 				foreach( int buff_id in mymod.Config.SniperWardingNeedsBuffs ) {
-					int idx = spawn_info.player.FindBuffIndex( buff_id );
-					if( idx == -1 || spawn_info.player.buffTime[idx] <= 0 ) {
+					int idx = spawnInfo.player.FindBuffIndex( buff_id );
+					if( idx == -1 || spawnInfo.player.buffTime[idx] <= 0 ) {
 						return true;
 					}
 				}

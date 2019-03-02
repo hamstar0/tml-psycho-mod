@@ -12,7 +12,7 @@ namespace Psycho {
 
 		////////////////
 
-		public override bool CloneNewInstances { get { return false; } }
+		public override bool CloneNewInstances => false;
 
 		public override void Initialize() {
 			this.HasEnteredWorld = false;
@@ -35,7 +35,7 @@ namespace Psycho {
 			if( Main.netMode == 0 ) {
 				this.HasEnteredWorld = true;
 			} else if( Main.netMode == 1 ) {
-				PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
+				PacketProtocolRequestToServer.QuickRequest<ModSettingsProtocol>( -1 );
 			}
 		}
 	}
