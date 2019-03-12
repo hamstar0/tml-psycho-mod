@@ -40,8 +40,7 @@ namespace Psycho.PsychoNpcs {
 		public override bool PreNPCLoot( NPC npc ) {
 			var mymod = (PsychoMod)this.mod;
 
-			switch( npc.type ) {
-			case NPCID.SkeletonSniper:
+			if( this.IsInitialized ) {
 				return mymod.Config.SniperCanDropLoot;
 			}
 

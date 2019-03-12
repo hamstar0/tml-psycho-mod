@@ -47,9 +47,10 @@ namespace Psycho.PsychoNpcs {
 		public override bool PreNPCLoot( NPC npc ) {
 			var mymod = (PsychoMod)this.mod;
 
-			if( npc.type == NPCID.Butcher ) {
+			if( this.IsInitialized ) {
 				return mymod.Config.ButcherCanDropLoot;
 			}
+
 			return base.PreNPCLoot( npc );
 		}
 
