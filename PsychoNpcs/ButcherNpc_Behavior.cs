@@ -9,8 +9,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 
-namespace Psycho {
-	partial class PsychoNpc : GlobalNPC {
+namespace Psycho.PsychoNpcs {
+	partial class ButcherNpc : GlobalNPC {
 		public void PreUpdateSingle( NPC npc ) {
 			this.PreUpdateLocal( npc );
 			this.PreUpdateWorld( npc );
@@ -52,16 +52,14 @@ namespace Psycho {
 //DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
 				MusicHelpers.SetVolumeScale( scale );
 			}
+			
+			Rectangle butcherRect = npc.getRect();
 
-			if( npc.type == NPCID.Butcher ) {
-				Rectangle butcherRect = npc.getRect();
-
-				if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
-					Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 23 + Main.rand.Next(0, 3), () => {
-						Main.PlaySound( SoundID.Item22.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item22.Style, 0.65f );
-						return false;
-					} );
-				}
+			if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
+				Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 23 + Main.rand.Next(0, 3), () => {
+					Main.PlaySound( SoundID.Item22.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item22.Style, 0.65f );
+					return false;
+				} );
 			}
 		}
 

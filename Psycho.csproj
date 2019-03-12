@@ -39,10 +39,17 @@
     <Compile Include="NetProtocols\ModSettingsProtocol.cs" />
     <Compile Include="PsychoMod_Meta.cs" />
     <Compile Include="PsychoMod.cs" />
-    <Compile Include="PsychoNpc.cs" />
-    <Compile Include="PsychoNpc_Spawn.cs" />
-    <Compile Include="PsychoNpc_Heal.cs" />
-    <Compile Include="PsychoNpc_Behavior.cs" />
+    <Compile Include="PsychoNpcs\ButcherNpc.cs" />
+    <Compile Include="PsychoNpcs\SniperNpc.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc.cs" />
+    <Compile Include="PsychoNpcs\ButcherNpc_Behavior.cs" />
+    <Compile Include="PsychoNpcs\ButcherNpc_Heal.cs" />
+    <Compile Include="PsychoNpcs\ButcherNpc_Spawn.cs" />
+    <Compile Include="PsychoNpcs\SniperNpc_Behavior.cs" />
+    <Compile Include="PsychoNpcs\SniperNpc_Spawn.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc_Spawn.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc_Heal.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc_Behavior.cs" />
     <Compile Include="PsychoPlayer.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,16 +4,14 @@ using Terraria.ModLoader;
 using Terraria;
 
 
-namespace Psycho {
-	partial class PsychoNpc : GlobalNPC {
+namespace Psycho.PsychoNpcs {
+	partial class SniperNpc : GlobalNPC {
 		private bool IsInitialized = false;
 		private bool _WasDay = Main.dayTime;
 
 
 		////
-
-		public int HealTimer { get; private set; }
-
+		
 		public override bool InstancePerEntity => true;
 		public override bool CloneNewInstances => true;
 
@@ -22,9 +20,8 @@ namespace Psycho {
 		////////////////
 
 		public override GlobalNPC Clone() {
-			var clone = (PsychoNpc)base.Clone();
+			var clone = (SniperNpc)base.Clone();
 			clone.IsInitialized = this.IsInitialized;
-			clone.HealTimer = this.HealTimer;
 			return clone;
 		}
 		
@@ -34,26 +31,17 @@ namespace Psycho {
 		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawnInfo ) {
 			var mymod = (PsychoMod)this.mod;
 			
-			if( PsychoNpc.CanSpawnPsycho( spawnInfo ) ) {
-				pool[ NPCID.Psycho ] = mymod.Config.PsychoSpawnChance;
-			}
-			if( PsychoNpc.CanSpawnButcher( spawnInfo ) ) {
-				pool[ NPCID.Butcher ] = mymod.Config.ButcherSpawnChance;
-			}
 			if( PsychoNpc.CanSpawnSniper( spawnInfo ) ) {
 				pool[ NPCID.SkeletonSniper ] = mymod.Config.SniperSpawnChance;
 			}
 		}
 
+		////
 
 		public override bool PreNPCLoot( NPC npc ) {
 			var mymod = (PsychoMod)this.mod;
 
 			switch( npc.type ) {
-			case NPCID.Psycho:
-				return mymod.Config.PsychoCanDropLoot;
-			case NPCID.Butcher:
-				return mymod.Config.ButcherCanDropLoot;
 			case NPCID.SkeletonSniper:
 				return mymod.Config.SniperCanDropLoot;
 			}
@@ -61,9 +49,10 @@ namespace Psycho {
 			return base.PreNPCLoot( npc );
 		}
 
+		////
 
 		public override bool PreAI( NPC npc ) {
-			if( !PsychoNpc.IsOurPsycho(npc) && !PsychoNpc.IsOurButcher(npc) && !PsychoNpc.IsOurSniper(npc) ) {
+			if( !PsychoNpc.IsOurSniper(npc) ) {
 				return base.PreAI( npc );
 			}
 
@@ -72,7 +61,7 @@ namespace Psycho {
 			if( !this.IsInitialized ) {
 				this.IsInitialized = true;
 
-				if( npc.type == NPCID.Psycho || npc.type == NPCID.Butcher || npc.type == NPCID.SkeletonSniper ) {
+				if( npc.type == NPCID.SkeletonSniper ) {
 					this.Initialize( npc );
 				}
 			}

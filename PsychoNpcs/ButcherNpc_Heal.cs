@@ -6,8 +6,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 
-namespace Psycho {
-	partial class PsychoNpc : GlobalNPC {
+namespace Psycho.PsychoNpcs {
+	partial class ButcherNpc : GlobalNPC {
 		private void UpdateHeal( NPC npc ) {
 			if( npc.type == NPCID.SkeletonSniper ) { return; }
 
