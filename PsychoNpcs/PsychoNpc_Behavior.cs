@@ -23,21 +23,6 @@ namespace Psycho.PsychoNpcs {
 		public void PreUpdateServer( NPC npc ) {
 			this.PreUpdateWorld( npc );
 		}
-		
-		////////////////
-
-		public void PostUpdateSingle( NPC npc ) {
-			this.PostUpdateLocal( npc );
-			this.PostUpdateWorld( npc );
-		}
-
-		public void PostUpdateClient( NPC npc ) {
-			this.PostUpdateLocal( npc );
-		}
-
-		public void PostUpdateServer( NPC npc ) {
-			this.PostUpdateWorld( npc );
-		}
 
 
 		////////////////
@@ -67,20 +52,6 @@ namespace Psycho.PsychoNpcs {
 					break;
 				}
 			}
-
-			this._WasDay = Main.dayTime;
-			Main.dayTime = false;
-		}
-
-
-		////////////////
-
-		private void PostUpdateLocal( NPC npc ) {
-		}
-
-
-		private void PostUpdateWorld( NPC npc ) {
-			Main.dayTime = this._WasDay;
 		}
 	}
 }

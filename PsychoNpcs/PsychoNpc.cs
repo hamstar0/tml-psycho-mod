@@ -7,7 +7,6 @@ using Terraria;
 namespace Psycho.PsychoNpcs {
 	partial class PsychoNpc : GlobalNPC {
 		private bool IsInitialized = false;
-		private bool _WasDay = Main.dayTime;
 
 
 		////
@@ -78,19 +77,6 @@ namespace Psycho.PsychoNpcs {
 			}
 
 			return base.PreAI( npc );
-		}
-
-
-		public override void AI( NPC npc ) {
-			if( this.IsInitialized ) {
-				if( Main.netMode == 2 ) {
-					this.PostUpdateServer( npc );
-				} else if( Main.netMode == 1 ) {
-					this.PostUpdateClient( npc );
-				} else {
-					this.PostUpdateSingle( npc );
-				}
-			}
 		}
 	}
 }

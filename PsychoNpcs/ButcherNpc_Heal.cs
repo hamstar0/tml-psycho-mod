@@ -10,7 +10,7 @@ namespace Psycho.PsychoNpcs {
 	partial class ButcherNpc : GlobalNPC {
 		private void UpdateHeal( NPC npc ) {
 			if( npc.type == NPCID.SkeletonSniper ) { return; }
-
+			
 			var mymod = (PsychoMod)this.mod;
 			
 			if( npc.life < npc.lifeMax ) {

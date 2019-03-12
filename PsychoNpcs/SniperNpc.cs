@@ -7,7 +7,6 @@ using Terraria;
 namespace Psycho.PsychoNpcs {
 	partial class SniperNpc : GlobalNPC {
 		private bool IsInitialized = false;
-		private bool _WasDay = Main.dayTime;
 
 
 		////
@@ -31,7 +30,7 @@ namespace Psycho.PsychoNpcs {
 		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawnInfo ) {
 			var mymod = (PsychoMod)this.mod;
 			
-			if( PsychoNpc.CanSpawnSniper( spawnInfo ) ) {
+			if( SniperNpc.CanSpawnSniper( spawnInfo ) ) {
 				pool[ NPCID.SkeletonSniper ] = mymod.Config.SniperSpawnChance;
 			}
 		}
@@ -52,7 +51,7 @@ namespace Psycho.PsychoNpcs {
 		////
 
 		public override bool PreAI( NPC npc ) {
-			if( !PsychoNpc.IsOurSniper(npc) ) {
+			if( !SniperNpc.IsOurSniper(npc) ) {
 				return base.PreAI( npc );
 			}
 
@@ -77,19 +76,6 @@ namespace Psycho.PsychoNpcs {
 			}
 
 			return base.PreAI( npc );
-		}
-
-
-		public override void AI( NPC npc ) {
-			if( this.IsInitialized ) {
-				if( Main.netMode == 2 ) {
-					this.PostUpdateServer( npc );
-				} else if( Main.netMode == 1 ) {
-					this.PostUpdateClient( npc );
-				} else {
-					this.PostUpdateSingle( npc );
-				}
-			}
 		}
 	}
 }

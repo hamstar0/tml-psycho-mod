@@ -9,7 +9,7 @@ namespace Psycho.PsychoNpcs {
 	partial class ButcherNpc : GlobalNPC {
 		public static bool IsOurButcher( NPC npc ) {
 			if( npc.type != NPCID.Butcher ) { return false; }
-
+			
 			var pos = npc.position;
 			return WorldHelpers.IsAboveWorldSurface(pos) && !Main.eclipse;
 		}

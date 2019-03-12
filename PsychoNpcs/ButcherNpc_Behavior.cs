@@ -77,8 +77,10 @@ namespace Psycho.PsychoNpcs {
 				}
 			}
 
-			this._WasDay = Main.dayTime;
-			Main.dayTime = false;
+			if( ButcherNpc.WasDay == null ) {
+				ButcherNpc.WasDay = Main.dayTime;
+				Main.dayTime = false;   // To be continued (in PostUpdateWorld)...
+			}
 		}
 
 
@@ -89,7 +91,10 @@ namespace Psycho.PsychoNpcs {
 
 
 		private void PostUpdateWorld( NPC npc ) {
-			Main.dayTime = this._WasDay;
+			if( ButcherNpc.WasDay != null ) {
+				Main.dayTime = (bool)ButcherNpc.WasDay;
+				ButcherNpc.WasDay = null;
+			}
 		}
 	}
 }

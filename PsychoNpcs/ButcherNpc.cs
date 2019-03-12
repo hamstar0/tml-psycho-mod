@@ -6,10 +6,14 @@ using Terraria;
 
 namespace Psycho.PsychoNpcs {
 	partial class ButcherNpc : GlobalNPC {
+		private static bool? WasDay = null;
+
+
+
+		////////////////
+
 		private bool IsInitialized = false;
-		private bool _WasDay = Main.dayTime;
-
-
+		
 		////
 
 		public int HealTimer { get; private set; }
@@ -34,7 +38,7 @@ namespace Psycho.PsychoNpcs {
 		public override void EditSpawnPool( IDictionary<int, float> pool, NPCSpawnInfo spawnInfo ) {
 			var mymod = (PsychoMod)this.mod;
 			
-			if( PsychoNpc.CanSpawnButcher( spawnInfo ) ) {
+			if( ButcherNpc.CanSpawnButcher( spawnInfo ) ) {
 				pool[ NPCID.Butcher ] = mymod.Config.ButcherSpawnChance;
 			}
 		}
@@ -51,7 +55,7 @@ namespace Psycho.PsychoNpcs {
 
 
 		public override bool PreAI( NPC npc ) {
-			if( !PsychoNpc.IsOurButcher(npc) ) {
+			if( !ButcherNpc.IsOurButcher(npc) ) {
 				return base.PreAI( npc );
 			}
 
