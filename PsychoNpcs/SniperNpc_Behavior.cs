@@ -27,11 +27,11 @@ namespace Psycho.PsychoNpcs {
 		////////////////
 
 		private void PreUpdateLocal( NPC npc ) {
-			float max_distance = 16 * 25;    // Proximity to underground player
+			float maxDistance = 16 * 25;    // Proximity to underground player
 
 			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
 				float dist = Math.Abs( Vector2.Distance( npc.position, Main.LocalPlayer.position ) );
-				float scale = MathHelper.Clamp( (dist / max_distance) - 0.25f, 0f, 1f );
+				float scale = MathHelper.Clamp( (dist / maxDistance) - 0.25f, 0f, 1f );
 
 //DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
 				MusicHelpers.SetVolumeScale( scale );

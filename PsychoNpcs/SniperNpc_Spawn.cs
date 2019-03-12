@@ -36,8 +36,8 @@ namespace Psycho.PsychoNpcs {
 			}
 
 			if( mymod.Config.SniperWardingNeedsBuffs.Length > 0 ) {
-				foreach( int buff_id in mymod.Config.SniperWardingNeedsBuffs ) {
-					int idx = spawnInfo.player.FindBuffIndex( buff_id );
+				foreach( int buffId in mymod.Config.SniperWardingNeedsBuffs ) {
+					int idx = spawnInfo.player.FindBuffIndex( buffId );
 					if( idx == -1 || spawnInfo.player.buffTime[idx] <= 0 ) {
 						return true;
 					}

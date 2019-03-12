@@ -21,8 +21,8 @@ namespace Psycho {
 
 		public float PsychoSpawnChance = 0.03f; //0.018f;
 		public bool PsychoCanDropLoot = true;
-		
-		public float ButcherSpawnChance = 0.0025f;
+
+		public float ButcherSpawnChance = 0.05f;
 		public bool ButcherCanDropLoot = true;
 
 		public float SniperSpawnChance = 0.015f;
@@ -60,14 +60,14 @@ namespace Psycho {
 		////////////////
 
 		public bool UpdateToLatestVersion() {
-			var new_config = new PsychoConfigData();
-			new_config.SetDefaults();
+			var newConfig = new PsychoConfigData();
+			newConfig.SetDefaults();
 
-			var vers_since = this.VersionSinceUpdate != "" ?
+			var versSince = this.VersionSinceUpdate != "" ?
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
 
-			if( vers_since >= PsychoMod.Instance.Version ) {
+			if( versSince >= PsychoMod.Instance.Version ) {
 				return false;
 			}
 
@@ -75,24 +75,29 @@ namespace Psycho {
 				this.SetDefaults();
 			}
 
-			if( vers_since < new Version(1, 3, 2, 1) ) {
-				this.PsychoSpawnChance = new_config.PsychoSpawnChance;
+			if( versSince < new Version(1, 3, 2, 1) ) {
+				this.PsychoSpawnChance = newConfig.PsychoSpawnChance;
 			}
 
-			if( vers_since < new Version(1, 4, 0) ) {
+			if( versSince < new Version(1, 4, 0) ) {
 				this.SetDefaults();
 			}
-			if( vers_since < new Version( 1, 4, 0, 1 ) ) {
-				this.ButcherSpawnChance = new_config.ButcherSpawnChance;
+			if( versSince < new Version( 1, 4, 0, 1 ) ) {
+				this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
 			}
-			if( vers_since < new Version( 1, 4, 2 ) ) {
+			if( versSince < new Version( 1, 4, 2 ) ) {
 				if( this.ButcherSpawnChance == 0.005f ) {
-					this.ButcherSpawnChance = new_config.ButcherSpawnChance;
+					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
 				}
 			}
-			if( vers_since < new Version(1, 5, 0) ) {
-				this.ButcherWardingNeedsBuffs = new_config.ButcherWardingNeedsBuffs;
-				this.SniperWardingNeedsBuffs = new_config.SniperWardingNeedsBuffs;
+			if( versSince < new Version(1, 5, 0) ) {
+				this.ButcherWardingNeedsBuffs = newConfig.ButcherWardingNeedsBuffs;
+				this.SniperWardingNeedsBuffs = newConfig.SniperWardingNeedsBuffs;
+			}
+			if( versSince < new Version( 1, 5, 2 ) ) {
+				if( this.ButcherSpawnChance == 0.0025f ) {
+					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
+				}
 			}
 
 			this.VersionSinceUpdate = PsychoMod.Instance.Version.ToString();
