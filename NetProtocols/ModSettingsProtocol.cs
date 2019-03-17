@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Components.Network;
+using HamstarHelpers.Helpers.TmlHelpers;
 using Terraria;
 
 
@@ -22,9 +23,10 @@ namespace Psycho.NetProtocols {
 		////////////////
 
 		protected override void ReceiveReply() {
-			PsychoMod.Instance.ConfigJson.SetData( this.Data );
+			var mymod = PsychoMod.Instance;
+			mymod.ConfigJson.SetData( this.Data );
 
-			var myplayer = Main.LocalPlayer.GetModPlayer<PsychoPlayer>();
+			var myplayer = (PsychoPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "PsychoPlayer" );
 			myplayer.HasEnteredWorld = true;
 		}
 	}
