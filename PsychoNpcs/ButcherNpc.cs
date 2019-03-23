@@ -6,7 +6,7 @@ using Terraria;
 
 namespace Psycho.PsychoNpcs {
 	partial class ButcherNpc : GlobalNPC {
-		private static bool? WasDay = null;
+		//private static bool? WasDay = null;
 
 
 

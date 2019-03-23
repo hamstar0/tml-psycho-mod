@@ -41,7 +41,7 @@ namespace Psycho.PsychoNpcs {
 				return false;
 			}
 
-			return true;
+			return !Main.dayTime;
 		}
 
 

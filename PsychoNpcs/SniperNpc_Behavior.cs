@@ -4,7 +4,6 @@ using HamstarHelpers.Helpers.WorldHelpers;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 
@@ -40,7 +39,6 @@ namespace Psycho.PsychoNpcs {
 
 
 		private void PreUpdateWorld( NPC npc ) {
-			Main.dayTime = false;
 		}
 	}
 }
