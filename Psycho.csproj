@@ -39,6 +39,9 @@
     <Compile Include="NetProtocols\ModSettingsProtocol.cs" />
     <Compile Include="PsychoMod_Meta.cs" />
     <Compile Include="PsychoMod.cs" />
+    <Compile Include="PsychoNpcs\SniperNpc_ModCompat.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc_ModCompat.cs" />
+    <Compile Include="PsychoNpcs\ButcherNpc_ModCompat.cs" />
     <Compile Include="PsychoNpcs\ButcherNpc.cs" />
     <Compile Include="PsychoNpcs\SniperNpc.cs" />
     <Compile Include="PsychoNpcs\PsychoNpc.cs" />
@@ -76,6 +79,9 @@
     <Reference Include="System" />
     <Reference Include="Terraria">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\terraria\Terraria.exe</HintPath>
+    </Reference>
+    <Reference Include="Windows">
+      <HintPath>..\..\..\..\..\My Games\Terraria\ModLoader\Mod Reader\TerrariaOverhaul\Windows.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ namespace Psycho {
 		public readonly static string ConfigFileName = "Psycho Config.json";
 
 
+
 		////////////////
 
 		public string VersionSinceUpdate = "";
