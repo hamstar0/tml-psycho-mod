@@ -79,7 +79,7 @@ namespace Psycho.PsychoNpcs {
 					this.PreUpdateSingle( npc );
 				}
 			}
-
+			
 			return base.PreAI( npc );
 		}
 

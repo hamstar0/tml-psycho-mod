@@ -1,5 +1,7 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.WorldHelpers;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -21,6 +23,18 @@ namespace Psycho.PsychoNpcs {
 			if( Main.eclipse ) { return false; }
 
 			var mymod = PsychoMod.Instance;
+			if( mymod.Config.DebugModeInfo ) {
+				IEnumerable<string> buffIndexes = mymod.Config.ButcherWardingNeedsBuffs.Select(
+					idx => spawnInfo.player.FindBuffIndex( idx ) + ""
+				);
+				DebugHelpers.Print( "spawnbutcher", "sc:" + mymod.Config.ButcherSpawnChance
+					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
+					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
+					+ ", nb:" + mymod.Config.ButcherWardingNeedsBuffs.Length
+					+ ", b:" + string.Join( ",", buffIndexes ),
+					60
+				);
+			}
 
 			if( mymod.Config.ButcherSpawnChance == 0 ) {
 				return false;

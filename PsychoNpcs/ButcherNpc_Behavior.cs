@@ -43,18 +43,6 @@ namespace Psycho.PsychoNpcs {
 		////////////////
 
 		private void PreUpdateLocal( NPC npc ) {
-			float maxDistance = 16 * 25;    // Proximity to underground player
-
-			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
-				float dist = Math.Abs( Vector2.Distance( npc.position, Main.LocalPlayer.position ) );
-				float scale = MathHelper.Clamp( (dist / maxDistance) - 0.25f, 0f, 1f );
-
-//DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
-				MusicHelpers.SetVolumeScale( scale );
-			}
-			
-			Rectangle butcherRect = npc.getRect();
-
 			if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
 				Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 23 + Main.rand.Next(0, 3), () => {
 					Main.PlaySound( SoundID.Item22.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item22.Style, 0.65f );

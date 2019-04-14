@@ -23,7 +23,7 @@ namespace Psycho {
 		public float PsychoSpawnChance = 0.03f; //0.018f;
 		public bool PsychoCanDropLoot = true;
 
-		public float ButcherSpawnChance = 0.0075f;
+		public float ButcherSpawnChance = 0.0125f;
 		public bool ButcherCanDropLoot = true;
 
 		public float SniperSpawnChance = 0.015f;
@@ -107,6 +107,11 @@ namespace Psycho {
 			}
 			if( versSince < new Version( 1, 5, 3 ) ) {
 				if( this.ButcherSpawnChance == 0.005f ) {
+					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
+				}
+			}
+			if( versSince < new Version( 1, 5, 3, 2 ) ) {
+				if( this.ButcherSpawnChance == 0.0075f ) {
 					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
 				}
 			}

@@ -1,4 +1,7 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.WorldHelpers;
+using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,6 +29,18 @@ namespace Psycho.PsychoNpcs {
 			}
 
 			var mymod = PsychoMod.Instance;
+			if( mymod.Config.DebugModeInfo ) {
+				IEnumerable<string> buffIndexes = mymod.Config.SniperWardingNeedsBuffs.Select(
+					idx => spawnInfo.player.FindBuffIndex( idx ) + ""
+				);
+				DebugHelpers.Print( "spawnsniper", "sc:" + mymod.Config.SniperSpawnChance
+					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
+					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
+					+ ", nb:" + mymod.Config.SniperWardingNeedsBuffs.Length
+					+ ", b:" + string.Join( ",", buffIndexes ),
+					60
+				);
+			}
 
 			if( mymod.Config.SniperSpawnChance == 0 ) {
 				return false;
