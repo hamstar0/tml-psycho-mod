@@ -30,8 +30,7 @@ namespace Psycho.PsychoNpcs {
 				DebugHelpers.Print( "spawnbutcher", "sc:" + mymod.Config.ButcherSpawnChance
 					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
 					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
-					+ ", nb:" + mymod.Config.ButcherWardingNeedsBuffs.Length
-					+ ", b:" + string.Join( ",", buffIndexes ),
+					+ ", ward:" + PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.ButcherWardingNeedsBuffs ),
 					60
 				);
 			}
@@ -45,13 +44,7 @@ namespace Psycho.PsychoNpcs {
 				return false;
 			}
 
-			if( mymod.Config.ButcherWardingNeedsBuffs.Length > 0 ) {
-				foreach( int buffId in mymod.Config.ButcherWardingNeedsBuffs ) {
-					int idx = spawnInfo.player.FindBuffIndex( buffId );
-					if( idx == -1 || spawnInfo.player.buffTime[idx] <= 0 ) {
-						return true;
-					}
-				}
+			if( PsychoPlayer.IsWarding(spawnInfo.player, mymod.Config.ButcherWardingNeedsBuffs) ) {
 				return false;
 			}
 
@@ -61,7 +54,7 @@ namespace Psycho.PsychoNpcs {
 
 
 		////////////////
-		
+
 		public void Initialize( NPC npc ) {
 			var mymod = PsychoMod.Instance;
 

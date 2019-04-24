@@ -6,6 +6,34 @@ using Terraria.ModLoader;
 
 namespace Psycho {
 	class PsychoPlayer : ModPlayer {
+		public static bool IsWarding( Player player, int[] buffIds ) {
+			var mymod = PsychoMod.Instance;
+
+			if( buffIds.Length > 0 ) {
+				bool isWarding = false;
+
+				foreach( int buffId in buffIds ) {
+					int idx = player.FindBuffIndex( buffId );
+					if( idx != -1 && player.buffTime[idx] >= 1 ) {
+						isWarding = true;
+					} else {
+						isWarding = false;
+						break;
+					}
+				}
+
+				if( isWarding ) {
+					return false;
+				}
+			}
+
+			return false;
+		}
+
+
+
+		////////////////
+
 		public bool HasEnteredWorld { get; internal set; }
 
 

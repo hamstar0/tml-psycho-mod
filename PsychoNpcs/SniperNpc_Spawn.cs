@@ -36,8 +36,8 @@ namespace Psycho.PsychoNpcs {
 				DebugHelpers.Print( "spawnsniper", "sc:" + mymod.Config.SniperSpawnChance
 					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
 					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
-					+ ", nb:" + mymod.Config.SniperWardingNeedsBuffs.Length
-					+ ", b:" + string.Join( ",", buffIndexes ),
+					+ ", jung:" + mymod.Config.SniperJungleOnly + " = " + spawnInfo.player.ZoneJungle
+					+ ", ward:" + PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.SniperWardingNeedsBuffs ),
 					60
 				);
 			}
@@ -50,13 +50,7 @@ namespace Psycho.PsychoNpcs {
 				return false;
 			}
 
-			if( mymod.Config.SniperWardingNeedsBuffs.Length > 0 ) {
-				foreach( int buffId in mymod.Config.SniperWardingNeedsBuffs ) {
-					int idx = spawnInfo.player.FindBuffIndex( buffId );
-					if( idx == -1 || spawnInfo.player.buffTime[idx] <= 0 ) {
-						return true;
-					}
-				}
+			if( PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.SniperWardingNeedsBuffs ) ) {
 				return false;
 			}
 
