@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
+using HamstarHelpers.Helpers.DebugHelpers;
 
 
 namespace Psycho.PsychoNpcs {
@@ -9,9 +10,11 @@ namespace Psycho.PsychoNpcs {
 		private bool IsInitialized = false;
 
 
+
 		////
 
 		public int HealTimer { get; private set; }
+		public int StalkTimer { get; private set; }
 
 		public override bool InstancePerEntity => true;
 		public override bool CloneNewInstances => true;
@@ -56,6 +59,7 @@ namespace Psycho.PsychoNpcs {
 			}
 
 			var mymod = (PsychoMod)this.mod;
+//DebugHelpers.Print( "psycho_"+npc.whoAmI, "color:"+npc.color+", hide:"+npc.hide+", ai: "+string.Join(", ",npc.ai.Select(a=>a.ToString("N2"))), 20 );
 
 			if( !this.IsInitialized ) {
 				this.IsInitialized = true;

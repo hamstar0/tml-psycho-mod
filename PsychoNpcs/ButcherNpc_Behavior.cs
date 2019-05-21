@@ -1,6 +1,4 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.MiscHelpers;
-using HamstarHelpers.Helpers.WorldHelpers;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
 using System;

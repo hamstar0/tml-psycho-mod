@@ -17,6 +17,9 @@ namespace Psycho {
 
 		public bool DebugModeInfo = false;
 
+		public bool AllPsychosAreInvincible = true;
+		public bool AllPsychosAlwaysInstaKill = true;
+
 		public int PsychoHealRate = (int)( 60f * 1.5f );
 		public int PsychoHealAmount = 50;
 
@@ -29,6 +32,8 @@ namespace Psycho {
 		public float SniperSpawnChance = 0.015f;
 		public bool SniperJungleOnly = true;
 		public bool SniperCanDropLoot = false;
+		public int SniperHardModeDamage = 600;
+		public int SniperPreHardModeDamage = 400;
 
 		public int[] PsychoWardingNeedsBuffs = new int[0];
 		public int[] ButcherWardingNeedsBuffs = new int[0];

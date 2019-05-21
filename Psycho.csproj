@@ -39,6 +39,7 @@
     <Compile Include="NetProtocols\ModSettingsProtocol.cs" />
     <Compile Include="PsychoMod_Meta.cs" />
     <Compile Include="PsychoMod.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc_Stalk.cs" />
     <Compile Include="PsychoNpcs\SniperNpc_ModCompat.cs" />
     <Compile Include="PsychoNpcs\PsychoNpc_ModCompat.cs" />
     <Compile Include="PsychoNpcs\ButcherNpc_ModCompat.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="PsychoNpcs\PsychoNpc_Heal.cs" />
     <Compile Include="PsychoNpcs\PsychoNpc_Behavior.cs" />
     <Compile Include="PsychoPlayer.cs" />
+    <Compile Include="Sounds\Custom\PsychoNear.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HamstarHelpers">
@@ -88,6 +90,7 @@
     <Content Include="build.txt" />
     <Content Include="description.txt" />
     <Content Include="icon.png" />
+    <Content Include="Sounds\Custom\PsychoNear.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

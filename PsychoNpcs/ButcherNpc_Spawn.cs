@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.WorldHelpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -57,6 +58,15 @@ namespace Psycho.PsychoNpcs {
 
 		public void Initialize( NPC npc ) {
 			var mymod = PsychoMod.Instance;
+
+			if( mymod.Config.AllPsychosAreInvincible ) {
+				npc.dontTakeDamage = true;
+				npc.dontTakeDamageFromHostiles = true;
+			}
+
+			if( mymod.Config.AllPsychosAlwaysInstaKill ) {
+				npc.damage = Int32.MaxValue / 4;
+			}
 
 			npc.lavaImmune = true;
 			this.HealTimer = 0;

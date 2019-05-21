@@ -1,7 +1,4 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.MiscHelpers;
-using HamstarHelpers.Helpers.WorldHelpers;
-using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -26,7 +23,7 @@ namespace Psycho.PsychoNpcs {
 		////////////////
 
 		private void PreUpdateLocal( NPC npc ) {
-			float maxDistance = 16 * 25;    // Proximity to underground player
+			/*float maxDistance = 16 * 25;    // Proximity to underground player
 
 			if( Main.netMode != 2 && !WorldHelpers.IsAboveWorldSurface( Main.LocalPlayer.position ) ) {
 				float dist = Math.Abs( Vector2.Distance( npc.position, Main.LocalPlayer.position ) );
@@ -34,7 +31,7 @@ namespace Psycho.PsychoNpcs {
 
 //DebugHelpers.SetDisplay("psychodist", (int)dist+" : "+scale, 20 );
 				MusicHelpers.SetVolumeScale( scale );
-			}
+			}*/
 		}
 
 

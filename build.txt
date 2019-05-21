@@ -1,7 +1,7 @@
 author = hamstar
-version = 1.5.3.3
+version = 1.5.4
 displayName = Psycho!
-modReferences = HamstarHelpers@4.3.0
+modReferences = HamstarHelpers@4.4.0
 weakReferences = TerrariaOverhaul
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 languageVersion = 6
