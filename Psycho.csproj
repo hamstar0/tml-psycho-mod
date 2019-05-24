@@ -37,8 +37,11 @@
     <Compile Include="API.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="NetProtocols\ModSettingsProtocol.cs" />
+    <Compile Include="PsychoMod_Funcs.cs" />
     <Compile Include="PsychoMod_Meta.cs" />
     <Compile Include="PsychoMod.cs" />
+    <Compile Include="PsychoNpcs\PsychoNpc_Draw.cs" />
+    <Compile Include="PsychoNpcs\ButcherNpc_Draw.cs" />
     <Compile Include="PsychoNpcs\PsychoNpc_Stalk.cs" />
     <Compile Include="PsychoNpcs\SniperNpc_ModCompat.cs" />
     <Compile Include="PsychoNpcs\PsychoNpc_ModCompat.cs" />
