@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="API.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Helpers\NPCHelpers\NPCHelpers.cs" />
     <Compile Include="NetProtocols\ModSettingsProtocol.cs" />
     <Compile Include="PsychoMod_Funcs.cs" />
     <Compile Include="PsychoMod_Meta.cs" />

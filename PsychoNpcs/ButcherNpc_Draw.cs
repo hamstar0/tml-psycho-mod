@@ -1,6 +1,6 @@
-﻿using HamstarHelpers.Helpers.NPCHelpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Psycho.Helpers.NPCHelpers;
 using Terraria;
 using Terraria.ModLoader;
 
