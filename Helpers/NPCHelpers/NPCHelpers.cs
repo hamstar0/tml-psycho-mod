@@ -78,7 +78,7 @@ namespace Psycho.Helpers.NPCHelpers {
 
 			Vector2 pos;
 			if( applyZoom ) {
-				pos = UIHelpers.UIHelpers.ConvertToScreenPosition( new Vector2( x, y ) );
+				pos = UIHelpers.ConvertToScreenPosition( new Vector2( x, y ) );
 			} else {
 				pos = new Vector2( x, y ) - Main.screenPosition;
 			}
