@@ -83,8 +83,8 @@ namespace Psycho.PsychoNpcs {
 		public void InitializeSniper( NPC npc ) {
 			var mymod = PsychoMod.Instance;
 
-			npc.life = npc.lifeMax = 10;
-			npc.defense = 300;
+			npc.life = npc.lifeMax = mymod.Config.SniperSpawnHp;
+			npc.defense = mymod.Config.SniperSpawnArmor;
 
 			if( mymod.Config.AllPsychosAlwaysInstaKill ) {
 				npc.damage = Int32.MaxValue / 4;

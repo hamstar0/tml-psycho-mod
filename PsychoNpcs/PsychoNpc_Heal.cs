@@ -33,7 +33,9 @@ namespace Psycho.PsychoNpcs {
 
 			if( healed > 0 ) {
 				int ct = CombatText.NewText( npc.getRect(), Color.Green, "+" + healed );
-				Main.combatText[ct].lifeTime = 60;
+				if( ct >= 0 && ct < Main.combatText.Length && Main.combatText[ct] != null ) {
+					Main.combatText[ct].lifeTime = 60;
+				}
 
 				npc.netUpdate = true;
 			}

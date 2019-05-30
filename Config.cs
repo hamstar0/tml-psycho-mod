@@ -34,6 +34,8 @@ namespace Psycho {
 		public bool SniperCanDropLoot = false;
 		public int SniperHardModeDamage = 600;
 		public int SniperPreHardModeDamage = 400;
+		public int SniperSpawnHp = 10;
+		public int SniperSpawnArmor = 300;
 
 		public int[] PsychoWardingNeedsBuffs = new int[0];
 		public int[] ButcherWardingNeedsBuffs = new int[0];
