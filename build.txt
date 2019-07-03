@@ -1,8 +1,7 @@
 author = hamstar
-version = 1.5.5.1
+version = 1.6.5
 displayName = Psycho!
-modReferences = HamstarHelpers@4.4.0
+modReferences = HamstarHelpers@5.0.0
 weakReferences = TerrariaOverhaul
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
-languageVersion = 6
 homepage = https://forums.terraria.org/index.php?threads/psycho.61219/
