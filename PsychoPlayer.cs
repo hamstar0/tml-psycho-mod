@@ -1,8 +1,6 @@
-﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.Helpers.WorldHelpers;
+﻿using HamstarHelpers.Helpers.World;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
-using Psycho.NetProtocols;
 using Psycho.PsychoNpcs;
 using Terraria;
 using Terraria.ModLoader;
@@ -66,15 +64,7 @@ namespace Psycho {
 			var mymod = (PsychoMod)this.mod;
 
 			if( Main.netMode == 0 ) {
-				if( !mymod.ConfigJson.LoadFile() ) {
-					mymod.ConfigJson.SaveFile();
-				}
-			}
-
-			if( Main.netMode == 0 ) {
 				this.HasEnteredWorld = true;
-			} else if( Main.netMode == 1 ) {
-				PacketProtocolRequestToServer.QuickRequest<ModSettingsProtocol>( -1 );
 			}
 		}
 

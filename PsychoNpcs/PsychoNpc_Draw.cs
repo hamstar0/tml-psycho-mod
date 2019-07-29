@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HamstarHelpers.Helpers.NPCs;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Psycho.Helpers.NPCHelpers;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -26,11 +26,11 @@ namespace Psycho.PsychoNpcs {
 			float colorRand = Main.rand.NextFloat();
 
 			mainColor *= colorRand;
-			NPCHelpers.DrawSimple( sb, npc, frame, pos, 0f, npc.scale, mainColor );
+			NPCDrawHelpers.DrawSimple( sb, npc, frame, pos, 0f, npc.scale, mainColor );
 
 			if( overlayColor.HasValue ) {
 				overlayColor = overlayColor.Value * colorRand;
-				NPCHelpers.DrawSimple( sb, npc, frame, pos, 0f, npc.scale, overlayColor.Value );
+				NPCDrawHelpers.DrawSimple( sb, npc, frame, pos, 0f, npc.scale, overlayColor.Value );
 			}
 		}
 	}

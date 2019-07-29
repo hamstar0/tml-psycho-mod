@@ -1,51 +1,89 @@
-﻿using HamstarHelpers.Components.Config;
-using System;
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.Serialization;
 using Terraria.ID;
+using Terraria.ModLoader.Config;
 
 
 namespace Psycho {
-	public class PsychoConfigData : ConfigurationDataBase {
-		public readonly static string ConfigFileName = "Psycho Config.json";
+	public class PsychoConfigData : ModConfig {
+		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
+		////
 
-		////////////////
-
-		public string VersionSinceUpdate = "";
-
+		[DefaultValue(true)]
 		public bool Enabled = true;
+
 
 		public bool DebugModeInfo = false;
 
+
+		[DefaultValue( true )]
 		public bool AllPsychosAreInvincible = true;
+
+		[DefaultValue( true )]
 		public bool AllPsychosAlwaysInstaKill = true;
 
+
+		[DefaultValue( (int)( 60f * 1.5f ) )]
 		public int PsychoHealRate = (int)( 60f * 1.5f );
+
+		[DefaultValue( 50 )]
 		public int PsychoHealAmount = 50;
 
+
+		[DefaultValue( 0.03f )]
 		public float PsychoSpawnChance = 0.03f; //0.018f;
+
+		[DefaultValue( true )]
 		public bool PsychoCanDropLoot = true;
 
+
 		public float ButcherSpawnChance = 0.0125f;
+
+		[DefaultValue( true )]
 		public bool ButcherCanDropLoot = true;
 
+
+		[DefaultValue( 0.015f )]
 		public float SniperSpawnChance = 0.015f;
+
+		[DefaultValue( true )]
 		public bool SniperJungleOnly = true;
+
+		[DefaultValue( false )]
 		public bool SniperCanDropLoot = false;
+
+		[DefaultValue( 600 )]
 		public int SniperHardModeDamage = 600;
+
+		[DefaultValue( 400 )]
 		public int SniperPreHardModeDamage = 400;
+
+		[DefaultValue( 10 )]
 		public int SniperSpawnHp = 10;
+
+		[DefaultValue( 300 )]
 		public int SniperSpawnArmor = 300;
 
+
 		public int[] PsychoWardingNeedsBuffs = new int[0];
+
 		public int[] ButcherWardingNeedsBuffs = new int[0];
+
 		public int[] SniperWardingNeedsBuffs = new int[0];
-		
+
 
 
 		////////////////
 
-		private void SetDefaults() {
+		[OnDeserialized]
+		internal void OnDeserializedMethod( StreamingContext context ) {
+			if( this.PsychoWardingNeedsBuffs != null ) {
+				return;
+			}
+
 			this.PsychoWardingNeedsBuffs = new int[] {
 				//BuffID.HeartLamp,
 				//BuffID.Sunflower,
@@ -62,70 +100,6 @@ namespace Psycho {
 				//BuffID.HeartLamp,
 				BuffID.StarInBottle
 			};
-		}
-		
-
-		////////////////
-
-		public bool UpdateToLatestVersion() {
-			var newConfig = new PsychoConfigData();
-			newConfig.SetDefaults();
-
-			var versSince = this.VersionSinceUpdate != "" ?
-				new Version( this.VersionSinceUpdate ) :
-				new Version();
-
-			if( versSince >= PsychoMod.Instance.Version ) {
-				return false;
-			}
-
-			if( this.VersionSinceUpdate == "" ) {
-				this.SetDefaults();
-			}
-
-			if( versSince < new Version(1, 3, 2, 1) ) {
-				this.PsychoSpawnChance = newConfig.PsychoSpawnChance;
-			}
-
-			if( versSince < new Version(1, 4, 0) ) {
-				this.SetDefaults();
-			}
-			if( versSince < new Version( 1, 4, 0, 1 ) ) {
-				this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
-			}
-			if( versSince < new Version( 1, 4, 2 ) ) {
-				if( this.ButcherSpawnChance == 0.005f ) {
-					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
-				}
-			}
-			if( versSince < new Version(1, 5, 0) ) {
-				this.ButcherWardingNeedsBuffs = newConfig.ButcherWardingNeedsBuffs;
-				this.SniperWardingNeedsBuffs = newConfig.SniperWardingNeedsBuffs;
-			}
-			if( versSince < new Version( 1, 5, 2 ) ) {
-				if( this.ButcherSpawnChance == 0.0025f ) {
-					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
-				}
-			}
-			if( versSince < new Version( 1, 5, 2, 1 ) ) {
-				if( this.ButcherSpawnChance == 0.05f ) {
-					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
-				}
-			}
-			if( versSince < new Version( 1, 5, 3 ) ) {
-				if( this.ButcherSpawnChance == 0.005f ) {
-					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
-				}
-			}
-			if( versSince < new Version( 1, 5, 3, 2 ) ) {
-				if( this.ButcherSpawnChance == 0.0075f ) {
-					this.ButcherSpawnChance = newConfig.ButcherSpawnChance;
-				}
-			}
-
-			this.VersionSinceUpdate = PsychoMod.Instance.Version.ToString();
-
-			return true;
 		}
 	}
 }

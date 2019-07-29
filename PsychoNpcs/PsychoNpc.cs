@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria;
-using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.Debug;
 
 
 namespace Psycho.PsychoNpcs {

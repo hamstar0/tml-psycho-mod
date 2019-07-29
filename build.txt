@@ -1,5 +1,5 @@
 author = hamstar
-version = 1.6.5
+version = 1.7.0
 displayName = Psycho!
 modReferences = HamstarHelpers@5.0.0
 weakReferences = TerrariaOverhaul

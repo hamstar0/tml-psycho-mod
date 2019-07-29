@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
 using System;

@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
