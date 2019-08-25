@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 using Terraria.ID;
 using Terraria.ModLoader.Config;
 
@@ -16,6 +16,7 @@ namespace Psycho {
 		public bool Enabled = true;
 
 
+		[DefaultValue( false )]
 		public bool DebugModeInfo = false;
 
 
@@ -68,38 +69,21 @@ namespace Psycho {
 		public int SniperSpawnArmor = 300;
 
 
-		public int[] PsychoWardingNeedsBuffs = new int[0];
+		public List<int> PsychoWardingNeedsBuffs = new List<int>() {
+			//BuffID.HeartLamp,
+			//BuffID.Sunflower,
+			BuffID.StarInBottle
+			//BuffID.Campfire
+		};
 
-		public int[] ButcherWardingNeedsBuffs = new int[0];
+		public List<int> ButcherWardingNeedsBuffs = new List<int>() {
+			//BuffID.HeartLamp,
+			BuffID.StarInBottle
+		};
 
-		public int[] SniperWardingNeedsBuffs = new int[0];
-
-
-
-		////////////////
-
-		[OnDeserialized]
-		internal void OnDeserializedMethod( StreamingContext context ) {
-			if( this.PsychoWardingNeedsBuffs != null ) {
-				return;
-			}
-
-			this.PsychoWardingNeedsBuffs = new int[] {
-				//BuffID.HeartLamp,
-				//BuffID.Sunflower,
-				BuffID.StarInBottle
-				//BuffID.Campfire
-			};
-
-			this.ButcherWardingNeedsBuffs = new int[] {
-				//BuffID.HeartLamp,
-				BuffID.StarInBottle
-			};
-
-			this.SniperWardingNeedsBuffs = new int[] {
-				//BuffID.HeartLamp,
-				BuffID.StarInBottle
-			};
-		}
+		public List<int> SniperWardingNeedsBuffs = new List<int>() {
+			//BuffID.HeartLamp,
+			BuffID.StarInBottle
+		};
 	}
 }

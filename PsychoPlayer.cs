@@ -2,6 +2,7 @@
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
 using Psycho.PsychoNpcs;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -15,10 +16,10 @@ namespace Psycho {
 
 		////////////////
 
-		public static bool IsWarding( Player player, int[] buffIds ) {
+		public static bool IsWarding( Player player, IList<int> buffIds ) {
 			var mymod = PsychoMod.Instance;
 
-			if( buffIds.Length > 0 ) {
+			if( buffIds.Count > 0 ) {
 				bool isWarding = false;
 
 				foreach( int buffId in buffIds ) {
