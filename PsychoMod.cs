@@ -10,7 +10,7 @@ namespace Psycho {
 
 		////////////////
 
-		public PsychoConfigData Config => this.GetConfig<PsychoConfigData>();
+		public PsychoConfig Config => this.GetConfig<PsychoConfig>();
 
 
 

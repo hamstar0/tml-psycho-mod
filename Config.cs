@@ -6,7 +6,7 @@ using Terraria.ModLoader.Config;
 
 
 namespace Psycho {
-	public class PsychoConfigData : ModConfig {
+	public class PsychoConfig : ModConfig {
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
@@ -85,5 +85,19 @@ namespace Psycho {
 			//BuffID.HeartLamp,
 			BuffID.StarInBottle
 		};
+
+
+
+		////////////////
+
+		public override ModConfig Clone() {
+			var clone = (PsychoConfig)base.Clone();
+
+			clone.PsychoWardingNeedsBuffs = new List<int>( this.PsychoWardingNeedsBuffs );
+			clone.ButcherWardingNeedsBuffs = new List<int>( this.ButcherWardingNeedsBuffs );
+			clone.SniperWardingNeedsBuffs = new List<int>( this.SniperWardingNeedsBuffs );
+
+			return clone;
+		}
 	}
 }
