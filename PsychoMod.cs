@@ -10,7 +10,7 @@ namespace Psycho {
 
 		////////////////
 
-		public PsychoConfig Config => this.GetConfig<PsychoConfig>();
+		public PsychoConfig Config => ModContent.GetInstance<PsychoConfig>();
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HamstarHelpers.Classes.UI.ModConfig;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Terraria.ID;
@@ -19,6 +20,7 @@ namespace Psycho {
 		[DefaultValue( false )]
 		public bool DebugModeInfo = false;
 
+		////
 
 		[DefaultValue( true )]
 		public bool AllPsychosAreInvincible = true;
@@ -27,27 +29,36 @@ namespace Psycho {
 		public bool AllPsychosAlwaysInstaKill = true;
 
 
+		[Range( 0, 60 * 60 )]
 		[DefaultValue( (int)( 60f * 1.5f ) )]
 		public int PsychoHealRate = (int)( 60f * 1.5f );
 
+		[Range( 0, 1000 )]
 		[DefaultValue( 50 )]
 		public int PsychoHealAmount = 50;
 
 
+		[Range( 0f, 1f )]
 		[DefaultValue( 0.03f )]
+		[CustomModConfigItem( typeof( FloatInputElement ) )]
 		public float PsychoSpawnChance = 0.03f; //0.018f;
 
 		[DefaultValue( true )]
 		public bool PsychoCanDropLoot = true;
 
 
+		[Range( 0f, 1f )]
+		[DefaultValue( 0.0125f )]
+		[CustomModConfigItem( typeof( FloatInputElement ) )]
 		public float ButcherSpawnChance = 0.0125f;
 
 		[DefaultValue( true )]
 		public bool ButcherCanDropLoot = true;
 
 
+		[Range( 0f, 1f )]
 		[DefaultValue( 0.015f )]
+		[CustomModConfigItem( typeof( FloatInputElement ) )]
 		public float SniperSpawnChance = 0.015f;
 
 		[DefaultValue( true )]
@@ -56,15 +67,19 @@ namespace Psycho {
 		[DefaultValue( false )]
 		public bool SniperCanDropLoot = false;
 
+		[Range( 1, 10000 )]
 		[DefaultValue( 600 )]
 		public int SniperHardModeDamage = 600;
 
+		[Range( 1, 10000 )]
 		[DefaultValue( 400 )]
 		public int SniperPreHardModeDamage = 400;
 
+		[Range( 1, 10000 )]
 		[DefaultValue( 10 )]
 		public int SniperSpawnHp = 10;
 
+		[Range( 1, 10000 )]
 		[DefaultValue( 300 )]
 		public int SniperSpawnArmor = 300;
 
