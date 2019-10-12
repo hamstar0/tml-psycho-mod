@@ -25,13 +25,15 @@ namespace Psycho.PsychoNpcs {
 
 			var mymod = PsychoMod.Instance;
 			if( mymod.Config.DebugModeInfo ) {
-				IEnumerable<string> buffIndexes = mymod.Config.PsychoWardingNeedsBuffs.Select(
-					idx => spawnInfo.player.FindBuffIndex( idx )+""
+				IEnumerable<string> buffIndexes = mymod.Config.PsychoWardingNeedsBuffTypes.Select(
+					idx => spawnInfo.player.FindBuffIndex( idx.Value )+""
 				);
 				DebugHelpers.Print( "spawnpsycho", "sc:" + mymod.Config.PsychoSpawnChance
 					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
 					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
-					+ ", ward:" + PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.PsychoWardingNeedsBuffs ),
+					+ ", ward:" + PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.PsychoWardingNeedsBuffTypes
+							.Select(b=>b.Value)
+							.ToList() ),
 					60
 				);
 			}
@@ -45,7 +47,7 @@ namespace Psycho.PsychoNpcs {
 				return false;
 			}
 			
-			if( PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.PsychoWardingNeedsBuffs ) ) {
+			if( PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.PsychoWardingNeedsBuffTypes.Select(b=>b.Value).ToList() ) ) {
 				return false;
 			}
 

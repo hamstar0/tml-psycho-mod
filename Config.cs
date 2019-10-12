@@ -7,6 +7,19 @@ using Terraria.ModLoader.Config;
 
 
 namespace Psycho {
+	class MyFloatInputElement : FloatInputElement { }
+
+
+
+
+	public class LargeIntSetting {
+		[Range( 0, 2000)]
+		public int Value;
+	}
+
+
+
+
 	public class PsychoConfig : ModConfig {
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
@@ -40,7 +53,7 @@ namespace Psycho {
 
 		[Range( 0f, 1f )]
 		[DefaultValue( 0.03f )]
-		[CustomModConfigItem( typeof( FloatInputElement ) )]
+		[CustomModConfigItem( typeof( MyFloatInputElement ) )]
 		public float PsychoSpawnChance = 0.03f; //0.018f;
 
 		[DefaultValue( true )]
@@ -49,7 +62,7 @@ namespace Psycho {
 
 		[Range( 0f, 1f )]
 		[DefaultValue( 0.0125f )]
-		[CustomModConfigItem( typeof( FloatInputElement ) )]
+		[CustomModConfigItem( typeof( MyFloatInputElement ) )]
 		public float ButcherSpawnChance = 0.0125f;
 
 		[DefaultValue( true )]
@@ -58,7 +71,7 @@ namespace Psycho {
 
 		[Range( 0f, 1f )]
 		[DefaultValue( 0.015f )]
-		[CustomModConfigItem( typeof( FloatInputElement ) )]
+		[CustomModConfigItem( typeof( MyFloatInputElement ) )]
 		public float SniperSpawnChance = 0.015f;
 
 		[DefaultValue( true )]
@@ -84,6 +97,25 @@ namespace Psycho {
 		public int SniperSpawnArmor = 300;
 
 
+		public List<LargeIntSetting> PsychoWardingNeedsBuffTypes = new List<LargeIntSetting>() {
+			//BuffID.HeartLamp,
+			//BuffID.Sunflower,
+			new LargeIntSetting{ Value = BuffID.StarInBottle }
+			//BuffID.Campfire
+		};
+
+		public List<LargeIntSetting> ButcherWardingNeedsBuffTypes = new List<LargeIntSetting>() {
+			//BuffID.HeartLamp,
+			new LargeIntSetting{ Value = BuffID.StarInBottle }
+		};
+
+		public List<LargeIntSetting> SniperWardingNeedsBuffTypes = new List<LargeIntSetting>() {
+			//BuffID.HeartLamp,
+			new LargeIntSetting{ Value = BuffID.StarInBottle }
+		};
+
+
+		[Header( "\n \nOBSOLETE SETTINGS BELOW" )]
 		public List<int> PsychoWardingNeedsBuffs = new List<int>() {
 			//BuffID.HeartLamp,
 			//BuffID.Sunflower,
@@ -108,9 +140,9 @@ namespace Psycho {
 		public override ModConfig Clone() {
 			var clone = (PsychoConfig)base.Clone();
 
-			clone.PsychoWardingNeedsBuffs = new List<int>( this.PsychoWardingNeedsBuffs );
-			clone.ButcherWardingNeedsBuffs = new List<int>( this.ButcherWardingNeedsBuffs );
-			clone.SniperWardingNeedsBuffs = new List<int>( this.SniperWardingNeedsBuffs );
+			clone.PsychoWardingNeedsBuffTypes = new List<LargeIntSetting>( this.PsychoWardingNeedsBuffTypes );
+			clone.ButcherWardingNeedsBuffTypes = new List<LargeIntSetting>( this.ButcherWardingNeedsBuffTypes );
+			clone.SniperWardingNeedsBuffTypes = new List<LargeIntSetting>( this.SniperWardingNeedsBuffTypes );
 
 			return clone;
 		}
