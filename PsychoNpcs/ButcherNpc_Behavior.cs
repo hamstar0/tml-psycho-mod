@@ -41,8 +41,10 @@ namespace Psycho.PsychoNpcs {
 		////////////////
 
 		private void PreUpdateLocal( NPC npc ) {
-			if( Timers.GetTimerTickDuration( "PsychoButcher_" + npc.whoAmI ) <= 0 ) {
-				Timers.SetTimer( "PsychoButcher_" + npc.whoAmI, 23 + Main.rand.Next(0, 3), () => {
+			string timerName = "PsychoButcher_" + npc.whoAmI;
+
+			if( Timers.GetTimerTickDuration( timerName ) <= 0 ) {
+				Timers.SetTimer( timerName, 23 + Main.rand.Next(0, 3), false, () => {
 					Main.PlaySound( SoundID.Item22.SoundId, (int)npc.position.X, (int)npc.position.Y, SoundID.Item22.Style, 0.65f );
 					return false;
 				} );

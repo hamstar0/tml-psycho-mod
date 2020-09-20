@@ -80,9 +80,10 @@ namespace Psycho {
 					if( Main.netMode != 2 ) {
 						if( PsychoPlayer.IsPsychoAlerted && PsychoPlayer.NearestPsychoDist != -1 ) {
 							float scale = MathHelper.Clamp( ((PsychoPlayer.NearestPsychoDist / PsychoNpc.AlertDistance) - 0.25f), 0f, 1f );
+							string timerName = "PsychoNearSound";
 
-							if( Timers.GetTimerTickDuration( "PsychoNearSound" ) <= 0 ) {
-								Timers.SetTimer( "PsychoNearSound", 1, () => {
+							if( Timers.GetTimerTickDuration(timerName) <= 0 ) {
+								Timers.SetTimer( timerName, 1, true, () => {
 									int soundSlot = this.mod.GetSoundSlot( SoundType.Custom, "Sounds/Custom/PsychoNear" );
 									Main.PlaySound( (int)SoundType.Custom, -1, -1, soundSlot, 1f - scale );
 
