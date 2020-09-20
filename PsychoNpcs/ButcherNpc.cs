@@ -31,7 +31,7 @@ namespace Psycho.PsychoNpcs {
 			clone.HealTimer = this.HealTimer;
 			return clone;
 		}
-		
+
 
 		////////////////
 
@@ -43,6 +43,7 @@ namespace Psycho.PsychoNpcs {
 			}
 		}
 
+		////
 
 		public override bool PreNPCLoot( NPC npc ) {
 			var mymod = (PsychoMod)this.mod;
@@ -54,6 +55,8 @@ namespace Psycho.PsychoNpcs {
 			return base.PreNPCLoot( npc );
 		}
 
+
+		////////////////
 
 		public override bool PreAI( NPC npc ) {
 			if( !ButcherNpc.IsOurButcher(npc) ) {

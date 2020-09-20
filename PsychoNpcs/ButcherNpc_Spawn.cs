@@ -24,19 +24,21 @@ namespace Psycho.PsychoNpcs {
 			if( Main.eclipse ) { return false; }
 
 			var mymod = PsychoMod.Instance;
-			if( mymod.Config.DebugModeInfo ) {
-				IEnumerable<string> buffIndexes = mymod.Config.ButcherWardingNeedsBuffTypes.Select(
+			PsychoConfig config = mymod.Config;
+
+			if( config.DebugModeInfo ) {
+				IEnumerable<string> buffIndexes = config.ButcherWardingNeedsBuffTypes.Select(
 					idx => spawnInfo.player.FindBuffIndex( idx.Value ) + ""
 				);
-				DebugHelpers.Print( "spawnbutcher", "sc:" + mymod.Config.ButcherSpawnChance
+				DebugHelpers.Print( "spawnbutcher", "sc:" + config.ButcherSpawnChance
 					+ ", iaws:" + WorldHelpers.IsAboveWorldSurface( spawnInfo.player.position )
 					+ ", iwu:" + WorldHelpers.IsWithinUnderworld( spawnInfo.player.position )
-					+ ", ward:" + PsychoPlayer.IsWarding( spawnInfo.player, mymod.Config.ButcherWardingNeedsBuffTypes.Select(b=>b.Value).ToList() ),
+					+ ", ward:" + PsychoPlayer.IsWarding( spawnInfo.player, config.ButcherWardingNeedsBuffTypes.Select(b=>b.Value).ToList() ),
 					60
 				);
 			}
 
-			if( mymod.Config.ButcherSpawnChance == 0 ) {
+			if( config.ButcherSpawnChance == 0 ) {
 				return false;
 			}
 
@@ -45,7 +47,11 @@ namespace Psycho.PsychoNpcs {
 				return false;
 			}
 
-			if( PsychoPlayer.IsWarding(spawnInfo.player, mymod.Config.ButcherWardingNeedsBuffTypes.Select(b=>b.Value).ToList()) ) {
+			if( config.ButcherSpawnBlockedAtTown && spawnInfo.player.townNPCs >= 1 ) {
+				return false;
+			}
+
+			if( PsychoPlayer.IsWarding(spawnInfo.player, config.ButcherWardingNeedsBuffTypes.Select(b=>b.Value).ToList()) ) {
 				return false;
 			}
 

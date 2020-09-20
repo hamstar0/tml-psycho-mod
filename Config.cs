@@ -1,9 +1,9 @@
-﻿using HamstarHelpers.Classes.UI.ModConfig;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Terraria.ID;
 using Terraria.ModLoader.Config;
+using HamstarHelpers.Classes.UI.ModConfig;
 
 
 namespace Psycho {
@@ -52,18 +52,21 @@ namespace Psycho {
 
 
 		[Range( 0f, 1f )]
-		[DefaultValue( 0.03f )]
+		[DefaultValue( 0.022f )]
 		[CustomModConfigItem( typeof( MyFloatInputElement ) )]
-		public float PsychoSpawnChance = 0.03f; //0.018f;
+		public float PsychoSpawnChance = 0.022f; //0.018f;
 
 		[DefaultValue( true )]
 		public bool PsychoCanDropLoot = true;
 
 
 		[Range( 0f, 1f )]
-		[DefaultValue( 0.0125f )]
+		[DefaultValue( 0.012f )]
 		[CustomModConfigItem( typeof( MyFloatInputElement ) )]
-		public float ButcherSpawnChance = 0.0125f;
+		public float ButcherSpawnChance = 0.012f;
+
+		[DefaultValue( true )]
+		public bool ButcherSpawnBlockedAtTown = true;
 
 		[DefaultValue( true )]
 		public bool ButcherCanDropLoot = true;
